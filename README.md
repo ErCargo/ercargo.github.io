@@ -1,2 +1,2 @@
 # ErCrago.github.io
-personal learning platform
+个人学习网站， 知识点总结。
