@@ -1,12 +1,53 @@
-title: "ErCargo个人技术沉淀"
-description: 
-google_analytics: 
-show_downloads: true
-theme: jekyll-theme-slate
+# Basic
+title: ErCargo's Blog, Coffee Time
+subtitle: 以大多数人的努力程度之低，根本轮不到拼天赋
+welcome_message: <a href="https://github.com/ErCargo/ercargo.github.io" target="_blank">Welcom to star and fork my github</a>
+description: Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)
+creator: <a href="https://github.com/ErCargo">@ErCargo</a>
 
-gems:
-  - jekyll-mentions
+url: "https://github.com/ErCargo"
 
-layout: post
-category: 笔记
-tags: [git, github page, jekyll, jekyll-bootstrap]
+permalink: /:year/:month/:title/
+
+# Format
+highlighter: rouge
+
+# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
+cover_color: orange
+
+# The blog button should not be removed.
+blog_button:
+    title: 主页
+    description: 访问主页
+    url: http://localhost:4000
+
+# Navigation buttons in the front page.
+nav:
+    - {title: 工具, description: tools, url: 'http://localhost:4000/#blog'}
+    - {title: 中间件, description: 中间件, url: 'http://localhost:4000/#blog'}
+    #- {title: 框架, description: 框架, url: 'http://localhost:4000/#blog'}
+    # - {title: Another Button, description: A button, url: 'http://example.com'}
+
+# Pagination
+plugins: [jekyll-paginate]
+paginate: 10
+paginate_path: "page/:num/"
+
+# Comment
+comment:
+    disqus: vno-jekyll
+    # duoshuo: 
+    
+# Social
+social:
+    weibo: ErCargo
+    github: ErCargo
+    #twitter: onevcat
+    jianshu: 55abc78f923e
+    zhihu: li-er-97-87
+    mail: liners_ky@163.com
+
+# Google Analytics
+ga:
+    # id: your_ga_id
+    # host: your_host
