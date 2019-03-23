@@ -19,7 +19,7 @@ cover_color: orange
 blog_button:
     title: 主页
     description: 访问主页
-    url: https://ercargo.github.io/tricky-fun-7/
+    url: https://ercargo.github.io
 
 # Navigation buttons in the front page.
 nav:
