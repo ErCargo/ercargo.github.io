@@ -23,14 +23,14 @@ blog_button:
 
 # Navigation buttons in the front page.
 nav:
-    - {title: 工具, description: tools, url: 'https://ercargo.github.io/#blog'}
-    - {title: 中间件, description: 中间件, url: 'https://ercargo.github.io/#blog'}
+    - {title: 分类, description: 分类, url: 'https://ercargo.github.io/#blog'}
+    - {title: 标签, description: 标签, url: 'https://ercargo.github.io/#blog'}
     #- {title: 框架, description: 框架, url: 'http://localhost:4000/#blog'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
 # Pagination
 plugins: [jekyll-paginate]
-paginate: 10
+paginate: 5
 paginate_path: "page/:num/"
 
 # Comment
