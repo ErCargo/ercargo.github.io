@@ -1,5 +1,5 @@
 # Basic
-title: ErCargo's Blog, Coffee Time
+title: ErCargo's Coffee Time
 subtitle: 以大多数人的努力程度之低，根本轮不到拼天赋
 welcome_message: <a href="https://github.com/ErCargo/ercargo.github.io" target="_blank">Welcom to star and fork my github</a>
 description: Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)
@@ -23,8 +23,8 @@ blog_button:
 
 # Navigation buttons in the front page.
 nav:
-    - {title: 工具, description: tools, url: 'http://localhost:4000/#blog'}
-    - {title: 中间件, description: 中间件, url: 'http://localhost:4000/#blog'}
+    - {title: 工具, description: tools, url: 'https://ercargo.github.io/#blog'}
+    - {title: 中间件, description: 中间件, url: 'https://ercargo.github.io/#blog'}
     #- {title: 框架, description: 框架, url: 'http://localhost:4000/#blog'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
@@ -35,14 +35,13 @@ paginate_path: "page/:num/"
 
 # Comment
 comment:
-    disqus: vno-jekyll
+    disqus:
     # duoshuo: 
     
 # Social
 social:
     weibo: ErCargo
     github: ErCargo
-    #twitter: onevcat
     jianshu: 55abc78f923e
     zhihu: li-er-97-87
     mail: liners_ky@163.com
