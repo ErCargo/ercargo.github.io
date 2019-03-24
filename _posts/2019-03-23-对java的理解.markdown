@@ -138,4 +138,4 @@ GC 简单来说就是java 的垃圾回收，但是里面包含的内容非常多
 [参考引用]
 1. 《Thinking in Java》
 2. 《剑指Java面试》
-3. 《2017编程提高第一季By刘欣》
+3. 《Effective Java》
