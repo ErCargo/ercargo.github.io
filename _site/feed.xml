@@ -5,9 +5,42 @@
     <description>Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Mar 2019 11:29:28 +0800</pubDate>
-    <lastBuildDate>Mon, 25 Mar 2019 11:29:28 +0800</lastBuildDate>
+    <pubDate>Thu, 28 Mar 2019 12:25:12 +0800</pubDate>
+    <lastBuildDate>Thu, 28 Mar 2019 12:25:12 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Redis</title>
+        <description>
+</description>
+        <pubDate>Tue, 26 Mar 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/03/Redis/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/Redis/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Spring技术内幕学习笔记</title>
+        <description>
+</description>
+        <pubDate>Mon, 25 Mar 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/03/Spring%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/Spring%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Java虚拟机学习笔记</title>
+        <description>
+</description>
+        <pubDate>Mon, 25 Mar 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/03/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+        
+        
+      </item>
     
       <item>
         <title>聊聊JVM与GC</title>
@@ -15,8 +48,8 @@
 GC – Java垃圾回收&lt;/p&gt;
 </description>
         <pubDate>Sun, 24 Mar 2019 13:45:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E8%81%8A%E8%81%8AJVM%E4%B8%8EGC/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E8%81%8A%E8%81%8AJVM%E4%B8%8EGC/</guid>
+        <link>http://localhost:4000/2019/03/%E8%81%8A%E8%81%8AGC/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/%E8%81%8A%E8%81%8AGC/</guid>
         
         
       </item>
@@ -155,7 +188,7 @@ public String getName(){
 &lt;h2 id=&quot;五gc&quot;&gt;五、GC&lt;/h2&gt;
 &lt;p&gt;GC是Java特性中的重点，也是面试经常被问到的问题。
 GC 简单来说就是java 的垃圾回收，但是里面包含的内容非常多。谈到GC, 必然要知道JVM，jvm的工作原理，内存结构。
-在&lt;a href=&quot;/2019/03/聊聊JVM与GC&quot;&gt;《对JVM的理解以及GC》&lt;/a&gt;这一篇中将会进行详细介绍。&lt;/p&gt;
+在&lt;a href=&quot;/2019/03/聊聊GC&quot;&gt;《聊聊GC》&lt;/a&gt;这一篇中将会进行详细介绍。&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;文章内容主要是对自己学习的总结，还有很多需要深入挖掘的内容，To Be Continue&lt;br /&gt;&lt;/p&gt;

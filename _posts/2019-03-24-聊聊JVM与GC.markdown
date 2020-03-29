@@ -1,8 +1,0 @@
----
-layout: post
-title: 聊聊JVM与GC
-date: 2019-03-24 13:45
----
-
-JVM -- Java虚拟机
-GC -- Java垃圾回收
