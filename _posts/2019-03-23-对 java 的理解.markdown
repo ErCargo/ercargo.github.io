@@ -66,6 +66,8 @@ public class ByteCodeTest {
 }
 ```
 反编译的过程解析一下 class 文件：
+
+( javap 是 jdk 自带反汇编器， 可以查看 java 编译器为我们生成的字节码)
 ![javap指令执行方式](/assets/images/javap.jpg)
 
 ps: 以上就是 java 虚拟机( HotSpot )所能理解的字节码
@@ -114,15 +116,15 @@ public class Teacher {
 ```
 
 ## 三、Java 语言特性
-关于 java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
+关于 Java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
 本文简单介绍一下 java 的泛型和反射，后面深入学习之后再作总结。<br/>
 - Java 泛型，简单的理解就是将原先具体的参数类型的定义泛化，编译器负责转成特定类型。多态实际上就是一种泛化机制。
 - Java 反射: 程序运行时，对任意一个类可以获取到类中的属性，方法； 对任意一个对象，可以调用他的方法。
 - Java8 Lambda 表达式，支持函数式编程
 
 
-## 四、java基础类库
-java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：[jdk](https://jdk.java.net/)<br/>
+## 四、Java基础类库
+Java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：[jdk](https://jdk.java.net/)<br/>
 比较重要的有：java 集合，java 并发库(J.U.C)， 网络库，IO，NIO 等等
 本文就不一一展开介绍，后续文章中会依次对这些重要的包进行总结。
 

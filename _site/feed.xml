@@ -5,9 +5,66 @@
     <description>Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 29 Mar 2020 19:39:35 +0800</pubDate>
-    <lastBuildDate>Sun, 29 Mar 2020 19:39:35 +0800</lastBuildDate>
+    <pubDate>Mon, 30 Mar 2020 21:50:06 +0800</pubDate>
+    <lastBuildDate>Mon, 30 Mar 2020 21:50:06 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>多线程之 ThreadLocal</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;Pre talk&lt;/li&gt;
+  &lt;li&gt;ThreadLocal 是什么？解决了什么问题？&lt;/li&gt;
+  &lt;li&gt;ThreadLocal 源码分析及实现原理&lt;/li&gt;
+  &lt;li&gt;ThreadLocal 的用法&lt;/li&gt;
+  &lt;li&gt;ThreadLocal 内存泄漏问题&lt;/li&gt;
+  &lt;li&gt;InheritableThreadLocal 的实现原理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;pre-talk&quot;&gt;Pre talk&lt;/h2&gt;
+
+&lt;h3 id=&quot;线程封闭技术&quot;&gt;线程封闭技术&lt;/h3&gt;
+&lt;p&gt;访问共享可变数据时，通常需要使用同步，同步会产生性能问题，如何避免使用同步的方式来保证线程安全问题 – 不共享数据， 如何保证数据不共享呢？
+如果仅仅是在单线程内访问数据，就不会存在数据共享的问题，也就不需要数据同步。 (线程封闭: Thread Confinement， 是实现线程安全最简单的方式之一)&lt;/p&gt;
+
+&lt;p&gt;当某个对象被封闭在一个线程中时， 这种用法将自动实现线程安全性，即使被封闭的对象本身不是线程安全的。&lt;/p&gt;
+
+&lt;p&gt;线程封闭常用的场景：JDBC 的 Connection 对象（非线程安全的连接池是没有意义的）&lt;/p&gt;
+
+&lt;p&gt;几种线程封闭技术&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ad-hoc 线程封闭： 由程序来承担维护线程封闭性的职责（脆弱的）&lt;/li&gt;
+  &lt;li&gt;栈封闭: 通过局部变量才能访问对象，局部变量的固有属性就是封闭在执行线程中（执行线程的栈中，因为变量是在栈中，栈是线程独立的）&lt;/li&gt;
+  &lt;li&gt;ThreadLocal: 是维持线程封闭性的规范的方法。ThreadLocal 能使线程中的某个值与保存值的对象关联起来。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;threadlocal-是什么解决了什么问题&quot;&gt;ThreadLocal 是什么、解决了什么问题？&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ThreadLocal.jpg&quot; alt=&quot;jdk1.8 ThreadLocal&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;粗略的解释：ThreadLocal 类提供了线程本地的实例变量。这些变量与普通变量的区别在于：每个使用该变量的线程都会初始化一个独立的副本， ThreadLocal 修饰的实例，是一个典型的和线程相关联的私有的静态变量… （能力有限翻译不出来了）&lt;/p&gt;
+
+&lt;p&gt;ThreadLocal 对象通常用于防止对「可变的单实例变量」或「全局变量」进行共享，如 全局的数据库连接（Connection）。&lt;/p&gt;
+
+&lt;p&gt;ThreadLocal 通常称为：线程本地变量/线程本地存储。ThreadLocal 提供了 get 和 set 方法，为每一个使用该变量的线程存有一份独立的副本。（ get 总是返回的当前执行线程在调用 set 时设置的最新值 ）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;一句话总结&lt;/strong&gt;: ThreadLocal 为每个线程提供局部变量， 每个线程都可以通过 set() get() 对这个局部变量进行操作，但不会和其他线程的局部变量产生冲突， 进而实现线程的数据隔离，保证线程安全。&lt;/p&gt;
+
+&lt;p&gt;另外一定要注意:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;ThreadLocal 不是用来解决共享对象的多线程访问问题， 通过 ThreadLocal.set() 到线程中的对象是该线程自己使用的对应，其他线程是不需要访问的，也访问不到；（各个线程中访问的是不同的对象）&lt;/li&gt;
+  &lt;li&gt;ThreadLocal 使得各线程能够保持各自独立的对象， 并不是通过 ThreadLocal.set() 来实现的， 而是通过 每个线程中的 new 对象的操作来创建的对象，每个线程创建一个。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最常见的 ThreadLocal 使用场景是用来解决「数据库连接」、「Session 管理」等问题。&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 30 Mar 2019 16:39:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/03/ThreadLocal/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/ThreadLocal/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Redis</title>
@@ -48,37 +105,37 @@
 GC – Java垃圾回收&lt;/p&gt;
 </description>
         <pubDate>Sun, 24 Mar 2019 13:45:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E8%81%8A%E8%81%8AGC/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E8%81%8A%E8%81%8AGC/</guid>
+        <link>http://localhost:4000/2019/03/%E8%81%8A%E8%81%8A-GC/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/%E8%81%8A%E8%81%8A-GC/</guid>
         
         
       </item>
     
       <item>
-        <title>如何理解java</title>
+        <title>如何理解 java</title>
         <description>&lt;ul&gt;
-  &lt;li&gt;java的平台无关性&lt;/li&gt;
+  &lt;li&gt;java 的平台无关性&lt;/li&gt;
   &lt;li&gt;面向对象&lt;/li&gt;
-  &lt;li&gt;Java的语言特性&lt;/li&gt;
-  &lt;li&gt;java类库&lt;/li&gt;
+  &lt;li&gt;Java 的语言特性&lt;/li&gt;
+  &lt;li&gt;java 类库&lt;/li&gt;
   &lt;li&gt;GC&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;对于Java的理解，每个程序员都会有不同的见解，而且能够说出很多不同维度的理解，如果发散开来一篇文章是说不完的。
-所以，本文主要是从Java的几点特性出发，简单的聊聊对Java的理解。&lt;/p&gt;
+&lt;p&gt;对于 Java 的理解，每个程序员都会有不同的见解，而且能够说出很多不同维度的理解，如果发散开来一篇文章是说不完的。
+所以，本文主要是从 Java 的几点特性出发，简单的聊聊对 Java 的理解， 会不断的补充进来&lt;/p&gt;
 
-&lt;h2 id=&quot;一java的平台无关性&quot;&gt;一、Java的平台无关性&lt;/h2&gt;
-&lt;p&gt;Java平台无关性简单理解就是一次编译到处运行，即平台无关性。那么问题来了，java是如何实现平台无关性的?&lt;br /&gt;
-通常Java程序运行会分为编译期和运行时&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;一java-的平台无关性&quot;&gt;一、Java 的平台无关性&lt;/h2&gt;
+&lt;p&gt;Java 平台无关性简单理解就是一次编译到处运行，即平台无关性。那么问题来了，java 是如何实现平台无关性的?&lt;br /&gt;
+通常 Java 程序运行会分为编译期和运行时 &lt;br /&gt;&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;编译期：通过Javac指令，编译是指编译Java的源码(&lt;em&gt;.java文件编写的)，将源码编译生成字节码(存入到对应的&lt;/em&gt;.class文件)，&lt;/li&gt;
-  &lt;li&gt;运行时：通过Java指令执行字节码文件；(将字节码翻译成对应平台的机器码)&lt;/li&gt;
+  &lt;li&gt;编译期：通过 Javac 指令，编译是指编译 Java 的源码(&lt;em&gt;.java文件编写的)，将源码编译生成字节码(存入到对应的&lt;/em&gt;.class文件)，&lt;/li&gt;
+  &lt;li&gt;运行时：通过 Java 指令执行字节码文件；(将字节码翻译成对应平台的机器码)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;反编译：Javap指令是jdk自带的反汇编器，可以查看Java编译器为我们生成的字节码;
-    Javap -c 对字节码代码进行反汇编，将从*.class到可执行程序的过程逆过来, 查看javac 生成的class文件的内容，就是将二进制文件转成class 文件的过程;&lt;/p&gt;
+&lt;p&gt;反编译：Javap 指令是jdk自带的反汇编器，可以查看Java编译器为我们生成的字节码;
+    Javap -c 对字节码代码进行反汇编，将从*.class到可执行程序的过程逆过来, 查看 javac 生成的 class 文件的内容，就是将二进制文件转成 class 文件的过程;&lt;/p&gt;
 
 &lt;p&gt;实践：下面给出一段代码，然后简单介绍一下这段代码的执行过程：&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class ByteCodeTest {
@@ -91,12 +148,12 @@ GC – Java垃圾回收&lt;/p&gt;
     }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;javac指令的执行方式：&lt;/p&gt;
+&lt;p&gt;javac 指令的执行方式：&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  javac + 类所在的文件路径 + 类名.java
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;执行会在与&lt;em&gt;.Java文件相同路径下生成&lt;/em&gt;.class文件&lt;/p&gt;
+&lt;p&gt;执行会在与 *.Java 文件相同路径下生成 *.class 文件&lt;/p&gt;
 
-&lt;p&gt;生成的class文件:&lt;/p&gt;
+&lt;p&gt;生成的 class 文件:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Source&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recreated&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IntelliJ&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDEA&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;powered&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fernflower&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decompiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -117,15 +174,15 @@ GC – Java垃圾回收&lt;/p&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;反编译的过程解析一下class文件：
+&lt;p&gt;反编译的过程解析一下 class 文件：
 &lt;img src=&quot;/assets/images/javap.jpg&quot; alt=&quot;javap指令执行方式&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;ps: 以上就是java虚拟机(HotSpot)所能理解的字节码&lt;/p&gt;
+&lt;p&gt;ps: 以上就是 java 虚拟机( HotSpot )所能理解的字节码&lt;/p&gt;
 
-&lt;p&gt;上述过程中.class文件中的字节码是java跨平台的核心和基础，Java虚拟机可以解析该文件，转换成特定平台的执行指令（Linux,Windows,MacOS）&lt;/p&gt;
+&lt;p&gt;上述过程中 .class 文件中的字节码是 java 跨平台的核心和基础，Java 虚拟机可以解析该文件，转换成特定平台的执行指令（Linux,Windows,MacOS）&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;总的来说：Java提供了各种不同平台上的虚拟机，jvm可以将字节码文件加载到内存，并最终转换成当前操作系统能够识别的机器码去执行，从而实现了平台无关性；&lt;/p&gt;
+  &lt;p&gt;总的来说：Java 提供了各种不同平台上的虚拟机，jvm 可以将字节码文件加载到内存，并最终转换成当前操作系统能够识别的机器码去执行，从而实现了平台无关性；&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;二面向对象&quot;&gt;二、面向对象&lt;/h2&gt;
@@ -135,14 +192,15 @@ GC – Java垃圾回收&lt;/p&gt;
   &lt;ul&gt;
     &lt;li&gt;封装: 封装是抽象具有相同特性和行为的对象集合，理解成对类的内部实现进行隐藏，对外界只暴露该类的访问方法&lt;/li&gt;
     &lt;li&gt;继承: 基类重用超类代码&lt;/li&gt;
-    &lt;li&gt;多态: 后期绑定/动态绑定，OOP中，程序直到运行时才能确定代码的地址，所以必须通过动态绑定，当像对象发送消息时，被调用的代码直到运行时才能确定。&lt;br /&gt;
+    &lt;li&gt;多态: 后期绑定/动态绑定，OOP 中，程序直到运行时才能确定代码的地址，所以必须通过动态绑定，当像对象发送消息时，被调用的代码直到运行时才能确定。&lt;br /&gt;
 涉及到泛型的概念&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;注意这里有一个问题，我们在真正写代码的时候会经常用继承吗？继承会导致一些什么问题？&lt;br /&gt;
-&lt;a href=&quot;https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/&quot;&gt;《Effective Java》&lt;/a&gt;中提出一个概念：组合优于继承
-为什么说组合优于继承呢？&lt;/p&gt;
+&lt;a href=&quot;https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/&quot;&gt;《Effective Java》&lt;/a&gt;中提出一个概念：组合优于继承&lt;/p&gt;
+
+&lt;p&gt;为什么说组合优于继承呢？&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;继承：子类继承父类，即父类的内部细节(方法和属性)对子类都是可见的，如果父类发生改变，子类必然也要随之改变，所以会造成代码的耦合度非常高
 而且破坏代码的封装性，一般除了使用多态的情况(需要从新类向基类进行向上转型)，或者父类完全不会改变的情况（确认基类与超类之间存在的只有is-a的关系），
@@ -171,24 +229,24 @@ public String getName(){
 } } ```
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;三java的语言特性&quot;&gt;三、Java的语言特性&lt;/h2&gt;
-&lt;p&gt;关于java的语言特性，主要包括：泛型，反射，java8提供的Lambda表达式等
-本文简单介绍一下java的泛型和反射，后面深入学习之后再作总结。&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;三java-语言特性&quot;&gt;三、Java 语言特性&lt;/h2&gt;
+&lt;p&gt;关于 java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
+本文简单介绍一下 java 的泛型和反射，后面深入学习之后再作总结。&lt;br /&gt;&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;Java泛型，简单的理解就是将原先具体的参数类型的定义泛化，编译器负责转成特定类型。多态实际上就是一种泛化机制。&lt;/li&gt;
-  &lt;li&gt;Java反射: 程序运行时，对任意一个类可以获取到类中的属性，方法； 对任意一个对象，可以调用他的方法。&lt;/li&gt;
-  &lt;li&gt;Java8 Lambda表达式，支持函数式编程&lt;/li&gt;
+  &lt;li&gt;Java 泛型，简单的理解就是将原先具体的参数类型的定义泛化，编译器负责转成特定类型。多态实际上就是一种泛化机制。&lt;/li&gt;
+  &lt;li&gt;Java 反射: 程序运行时，对任意一个类可以获取到类中的属性，方法； 对任意一个对象，可以调用他的方法。&lt;/li&gt;
+  &lt;li&gt;Java8 Lambda 表达式，支持函数式编程&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;四java基础类库&quot;&gt;四、java基础类库&lt;/h2&gt;
-&lt;p&gt;java的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：&lt;a href=&quot;https://jdk.java.net/&quot;&gt;jdk&lt;/a&gt;&lt;br /&gt;
-比较重要的有：java集合，java并发库(J.U.C)， 网络库，IO，NIO等等
+&lt;p&gt;java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：&lt;a href=&quot;https://jdk.java.net/&quot;&gt;jdk&lt;/a&gt;&lt;br /&gt;
+比较重要的有：java 集合，java 并发库(J.U.C)， 网络库，IO，NIO 等等
 本文就不一一展开介绍，后续文章中会依次对这些重要的包进行总结。&lt;/p&gt;
 
 &lt;h2 id=&quot;五gc&quot;&gt;五、GC&lt;/h2&gt;
-&lt;p&gt;GC是Java特性中的重点，也是面试经常被问到的问题。
-GC 简单来说就是java 的垃圾回收，但是里面包含的内容非常多。谈到GC, 必然要知道JVM，jvm的工作原理，内存结构。
-在&lt;a href=&quot;/2019/03/聊聊GC&quot;&gt;《聊聊GC》&lt;/a&gt;这一篇中将会进行详细介绍。&lt;/p&gt;
+&lt;p&gt;GC 是 Java 特性中的重点，也是面试经常被问到的问题。
+GC 简单来说就是 java 的垃圾回收，但是里面包含的内容非常多。谈到 GC, 必然要知道 JVM 的工作原理，内存结构。
+在&lt;a href=&quot;/2019/03/聊聊GC&quot;&gt;《聊聊 GC》&lt;/a&gt;这一篇中将会进行详细介绍。&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;文章内容主要是对自己学习的总结，还有很多需要深入挖掘的内容，To Be Continue&lt;br /&gt;&lt;/p&gt;
@@ -201,8 +259,8 @@ GC 简单来说就是java 的垃圾回收，但是里面包含的内容非常多
 &lt;/ol&gt;
 </description>
         <pubDate>Sun, 24 Mar 2019 13:45:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E5%AF%B9java%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E5%AF%B9java%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
+        <link>http://localhost:4000/2019/03/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
         
         
       </item>
