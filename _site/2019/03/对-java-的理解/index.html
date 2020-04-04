@@ -221,8 +221,13 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>反编译的过程解析一下 class 文件：
-<img src="/assets/images/javap.jpg" alt="javap指令执行方式" /></p>
+<p>反编译的过程解析一下 class 文件：</p>
+
+<ul>
+  <li>javap 是 jdk 自带反汇编器， 可以查看 java 编译器为我们生成的字节码;</li>
+</ul>
+
+<p><img src="/assets/images/javap.jpg" alt="javap指令执行方式" /></p>
 
 <p>ps: 以上就是 java 虚拟机( HotSpot )所能理解的字节码</p>
 
@@ -277,7 +282,7 @@ public String getName(){
 </code></pre></div></div>
 
 <h2 id="三java-语言特性">三、Java 语言特性</h2>
-<p>关于 java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
+<p>关于 Java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
 本文简单介绍一下 java 的泛型和反射，后面深入学习之后再作总结。<br /></p>
 <ul>
   <li>Java 泛型，简单的理解就是将原先具体的参数类型的定义泛化，编译器负责转成特定类型。多态实际上就是一种泛化机制。</li>
@@ -285,8 +290,8 @@ public String getName(){
   <li>Java8 Lambda 表达式，支持函数式编程</li>
 </ul>
 
-<h2 id="四java基础类库">四、java基础类库</h2>
-<p>java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：<a href="https://jdk.java.net/">jdk</a><br />
+<h2 id="四java基础类库">四、Java基础类库</h2>
+<p>Java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：<a href="https://jdk.java.net/">jdk</a><br />
 比较重要的有：java 集合，java 并发库(J.U.C)， 网络库，IO，NIO 等等
 本文就不一一展开介绍，后续文章中会依次对这些重要的包进行总结。</p>
 
@@ -349,7 +354,7 @@ GC 简单来说就是 java 的垃圾回收，但是里面包含的内容非常�
         <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-03-30 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-04 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
     </footer>
 </section>

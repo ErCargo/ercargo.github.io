@@ -1,0 +1,66 @@
+---
+layout: post
+title: Java 反射实践
+date: 2019-03-31 23:13
+---
+
+
+
+## Java 反射机制
+
+能够动态获取信息、动态调用对象方法，即：
+在运行过程中：
+- 对任意一个「类」都能知道它的属性和方法；
+- 对任意一个「对象」，都能调用它的任意方法和属性；
+
+e.g: 
+
+```java
+public class RobotTest {
+    private String name;
+
+    public void sayHi(String helloSentence){
+        System.out.println(helloSentence + "" + name);
+    }
+
+    private String throwHello(String tag){
+        return "Hello" + tag;
+    }
+}
+```
+
+```java
+public class ReflectSample {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+        Class rt = Class.forName("com.ercargo.restart.RobotTest");
+        // 创建实例
+        RobotTest r = (RobotTest) rt.newInstance();
+        System.out.println("Class name is" + rt.getName());
+        // getDeclaredMethod 获取所有声明的方法，但不能获取继承的方法和实现的接口的方法
+        Method getHello = rt.getDeclaredMethod("throwHello", String.class);
+        // 私有方法
+        getHello.setAccessible(true);
+
+        Object str = getHello.invoke(r, "World");
+        System.out.println("success reflect getHello method " + str);
+
+        /** ---- 另一种方法 ---- **/
+        // getMethod() 只能获取公共方法， 也能获取继承类的公用方法，和接口实现的公用方法
+        Method sayHi = rt.getMethod("sayHi", String.class);
+        sayHi.invoke(r,"Welcome");
+
+        // 获取私有类型的属性
+        Field field = rt.getDeclaredField("name");
+        field.setAccessible(true);
+        field.set(r, "WWWWWWorld");
+        sayHi.invoke(r, "Welcome  ");
+    }
+}
+```
+
+ Q: 反射为什么能在运行时获取类的属性和方法，并对其进行调用？ 
+ 
+     运行时获取类的属性和方法，并对其进行调用，就必须要获取 class 对象，获取类的 class 对象，就必须要获取该类的字节码文件
+     
+继续探索：[Java字节码学习笔记](/2020/04/Java字节码学习笔记)
+  

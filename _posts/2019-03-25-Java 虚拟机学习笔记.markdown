@@ -1,82 +1,192 @@
 ---
 layout: post
-title: Java 虚拟机
+title: Java 虚拟机学习笔记
 date: 2019-03-31 23:13
 ---
 
 - Java 虚拟机
-- Java 反射机制
+- 什么是 ClassLoader 
 
 
 ------------------------------------------------------------------------------------------------
 ## Java 虚拟机
 > 虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；
-> JVM 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
-> JVM 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行
+> Java 虚拟机 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
+> Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行
+
+    Java 程序之所以可以「一次编译，到处运行」 原因是: 
+    - Java 虚拟机对各种不同的操作系统/平台进行了定制；
+    - 无论在什么平台都可以编译生成固定的字节码（.class 文件）供 JVM 使用
 
 JVM 是一个内存中的虚拟机，JVM 的存储就是内存，所有 类、常量、变量、方法都在内存中。
 
 JVM 的组成部分：
-1. Class Loader: 加载编译后的 class 文件到内存
+
+![Java 虚拟机](/assets/images/javavm.jpg)
+
+1. Class Loader: 作用: 加载编译后的 class 文件到内存
 2. RunTime Data Area: JVM 内存模型
 3. Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行
 4. Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用
 
 Q: JVM 如何加载 .class 文件
 
+    A: JVM 由 4个部分组成，包括 ClassLoader, Runtime Data Area, Execution Engine 和 Native Interface；
+    主要通过 ClassLoader 将符合虚拟机规范的 class 文件加载到内存中， 再通过 Execution Engine 解析 Class 文件中的字节码，
+    提交给操作系统执行
 
-## Java 反射机制
-概念：能够动态获取信息、动态调用对象方法，即：
-在运行过程中：
-- 对任意一个「类」都能知道它的属性和方法；
-- 对任意一个「对象」，都能调用它的任意方法和属性；
+思考：类从编译到执行的过程
+      
+ ![Java 运行示意图(摘自其他网站)](/assets/images/javac.jpg)
+      
+      *.java file  --> Java Compiler(javac) --> *.class file --> Java Virtual Machine
+      
+      Java Virtual Machine: 
+       - ClassLoader
+       - ByteCode Verifier
+       - Java Runtime System
+       - Native OS
 
-e.g: 
+ 
+## 什么是 ClassLoader 
+ 
+  > ClassLoader 工作在 Class 装载的加载阶段，其主要作用是从系统外部获得 Class 二进制数据流，所有的 Class 都是由 ClassLoader 进行加载的， 
+  > ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统， 然后交给 Java 虚拟机进行连接，初始化等操作
 
-```java
-public class RobotTest {
-    private String name;
+### ClassLoader 的类别
 
-    public void sayHi(String helloSentence){
-        System.out.println(helloSentence + "" + name);
-    }
+  1. BoostrapClassLoader: 加载核心库 Java.*  
+     
+     (主要作用是负责加载 Java 自带的核心类，e.g: java.lang.xx 中的类都是由 BootstrapClassLoader 负责加载，通常这些核心类都是被签名的， 不能被替换， 是由 JVM 内核实现的， 目前在 HotspotVM 中是由 C++ 来实现，有了它加载最核心的内容， 才会有后面的 ClassLoader 存在)
+     
+  2. ExtClassLoader (extends URLClassLoader, 获取 class 文件的路径： "java.ext.dirs")
+     
+      用户可见的 ClassLoader，用于加载位于 JRE 外 ext 目录下的 jar 包 （加载扩展库 javax.*) ， 用户也可以将自己自定义的 jar 包放到 该目录下，通过 ExtClassLoader 进行加载；
+      
+  3. AppClassLoader(extends URLClassLoader, "java.class.path");)
+      
+      用来加载 ClassPath 下的文件，类路径
+      
+  4. 自定义 ClassLoader: (可能不在系统的 classpath 范围内， 也可以指定在范围内) Java 编写，定制化加载
+  
+### 自定义 ClassLoader 如何实现：
+      
+  几个关键函数: 
+  
+   ```java
+      loadClass()
+   ```
+    
+   ```java
+     // findClass() 作用：根据位置/名称 加载 .class 字节码
+     protected Class<?> findCLass(String name){}
+   ```
+   
+   ```java
+     // 调用 defineClass() 解析定义 .class 字节流，返回 class 对象
+     // 重新定义和生成类
+     // byte[] class 字节码
+     protected final Class<?> defineClass(byte[] b, int off, int len){
+       return defineClass(null, b, off, len, null);
+     }
+   ```
+     
+   exp:
+     
+   首先在项目外部任意一个 path 下创建一个 java 文件
+   ```java
+   public class Walle {
+   	static{
+   		System.out.println("Hello World");
+   	}
+   }
+   
+   ```
+     
+   然后通过 javac 编译 *.java 文件，生成 *.class 文件
+   
+   通过自定义 ClassLoader 加载、解析 *.class 文件
+   
+   ```java
+   /**
+    * @author ercargo  on 2020/4/4
+    * @DESCRIBE 定义一个自定义 classLoader
+    */
+   public class MyCLassLoader extends ClassLoader {
+       private String path;
+       private String classLoaderName;
+   
+       public MyCLassLoader(String path, String classLoaderName) {
+           this.path = path;
+           this.classLoaderName = classLoaderName;
+       }
+   
+       // 查找类文件
+       @Override
+       public Class findClass(String name) {
+           byte[] b = loadClassData(name);
+           return defineClass(name, b, 0, b.length);
+       }
+   
+       // 用于加载类文件
+       private byte[] loadClassData(String name) {
+           // 路径找到对应的 class 文件
+           name = path + name + ".class";
+   
+           // 输入流读取文件
+           InputStream in = null;
+           // byte 作为接收，输出
+           ByteArrayOutputStream out = null;
+   
+           try {
+               in = new FileInputStream(new File(name));
+               out = new ByteArrayOutputStream();
+   
+               int i = 0;
+               // 循环读取文件
+               while ((i = in.read()) != -1) {
+                   out.write(i);
+               }
+   
+   
+           } catch (Exception e) {
+               e.printStackTrace();
+           } finally {
+               try {
+                   out.close();
+                   in.close();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+           }
+           return out.toByteArray();
+       }
+   }
+   ```
+     
+   ```java
+   /**
+    * @author ercargo  on 2020/4/4
+    * @DESCRIBE 校验自定义 ClassLoader 是否 work
+    */
+   public class ClassLoaderChecker {
+       public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+           MyCLassLoader loader = new MyCLassLoader("/Users/ercargo/Desktop/","xxx");
+           Class c = loader.loadClass("Walle");
+           System.out.println(c.getClassLoader());
+           c.newInstance();
+       }
+   }
+   ```
+   
+   findClass() 不仅可以在自定义的目录下加载文件，也可以通过不同的形式进行加载， 只要保证调用 defineClass() 时传入的二进制字节流是合法的：
+   
+   1. 访问远程的网络获取二进制流；
+   2. 对敏感文件进行加密, 在 findClass() 进行解密；
+   3. 对生成的二进制流代码进行修改，给类添加一些信息（如： asm 就是用来改造二进制流的行为； 字节码增强技术； 动态代理、AOP 的实现）
+     
+    
+     引申思考「字节码增强技术」[Java字节码学习笔记](/2020/04/Java字节码学习笔记)
 
-    private String throwHello(String tag){
-        return "Hello" + tag;
-    }
-}
-
-```
-
-```java
-public class ReflectSample {
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-        Class rt = Class.forName("com.ercargo.restart.RobotTest");
-        // 创建实例
-        RobotTest r = (RobotTest) rt.newInstance();
-        System.out.println("Class name is" + rt.getName());
-        // getDeclaredMethod 获取所有声明的方法，但不能获取继承的方法和实现的接口的方法
-        Method getHello = rt.getDeclaredMethod("throwHello", String.class);
-        // 私有方法
-        getHello.setAccessible(true);
-
-        Object str = getHello.invoke(r, "World");
-        System.out.println("success reflect getHello method " + str);
-
-        /** ---- 另一种方法 ---- **/
-        // getMethod() 只能获取公共方法， 也能获取继承类的公用方法，和接口实现的公用方法
-        Method sayHi = rt.getMethod("sayHi", String.class);
-        sayHi.invoke(r,"Welcome");
-
-        // 获取私有类型的属性
-        Field field = rt.getDeclaredField("name");
-        field.setAccessible(true);
-        field.set(r, "WWWWWWorld");
-        sayHi.invoke(r, "Welcome  ");
-    }
-}
-```
-                 
-
-
+ 
 
