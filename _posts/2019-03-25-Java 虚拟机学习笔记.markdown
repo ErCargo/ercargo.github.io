@@ -1,0 +1,82 @@
+---
+layout: post
+title: Java 虚拟机
+date: 2019-03-31 23:13
+---
+
+- Java 虚拟机
+- Java 反射机制
+
+
+------------------------------------------------------------------------------------------------
+## Java 虚拟机
+> 虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；
+> JVM 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
+> JVM 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行
+
+JVM 是一个内存中的虚拟机，JVM 的存储就是内存，所有 类、常量、变量、方法都在内存中。
+
+JVM 的组成部分：
+1. Class Loader: 加载编译后的 class 文件到内存
+2. RunTime Data Area: JVM 内存模型
+3. Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行
+4. Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用
+
+Q: JVM 如何加载 .class 文件
+
+
+## Java 反射机制
+概念：能够动态获取信息、动态调用对象方法，即：
+在运行过程中：
+- 对任意一个「类」都能知道它的属性和方法；
+- 对任意一个「对象」，都能调用它的任意方法和属性；
+
+e.g: 
+
+```java
+public class RobotTest {
+    private String name;
+
+    public void sayHi(String helloSentence){
+        System.out.println(helloSentence + "" + name);
+    }
+
+    private String throwHello(String tag){
+        return "Hello" + tag;
+    }
+}
+
+```
+
+```java
+public class ReflectSample {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+        Class rt = Class.forName("com.ercargo.restart.RobotTest");
+        // 创建实例
+        RobotTest r = (RobotTest) rt.newInstance();
+        System.out.println("Class name is" + rt.getName());
+        // getDeclaredMethod 获取所有声明的方法，但不能获取继承的方法和实现的接口的方法
+        Method getHello = rt.getDeclaredMethod("throwHello", String.class);
+        // 私有方法
+        getHello.setAccessible(true);
+
+        Object str = getHello.invoke(r, "World");
+        System.out.println("success reflect getHello method " + str);
+
+        /** ---- 另一种方法 ---- **/
+        // getMethod() 只能获取公共方法， 也能获取继承类的公用方法，和接口实现的公用方法
+        Method sayHi = rt.getMethod("sayHi", String.class);
+        sayHi.invoke(r,"Welcome");
+
+        // 获取私有类型的属性
+        Field field = rt.getDeclaredField("name");
+        field.setAccessible(true);
+        field.set(r, "WWWWWWorld");
+        sayHi.invoke(r, "Welcome  ");
+    }
+}
+```
+                 
+
+
+

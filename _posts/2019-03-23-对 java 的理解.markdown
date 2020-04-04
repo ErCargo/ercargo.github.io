@@ -67,7 +67,8 @@ public class ByteCodeTest {
 ```
 反编译的过程解析一下 class 文件：
 
-( javap 是 jdk 自带反汇编器， 可以查看 java 编译器为我们生成的字节码)
+- javap 是 jdk 自带反汇编器， 可以查看 java 编译器为我们生成的字节码;
+
 ![javap指令执行方式](/assets/images/javap.jpg)
 
 ps: 以上就是 java 虚拟机( HotSpot )所能理解的字节码
