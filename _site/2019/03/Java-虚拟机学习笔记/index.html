@@ -6,16 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>Java 虚拟机学习笔记</title>
-  <meta name="description" content="  Java 虚拟机  什么是 ClassLoader">
+  <meta name="description" content="  Java 虚拟机">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Java 虚拟机学习笔记">
-  <meta name="twitter:description" content="  Java 虚拟机  什么是 ClassLoader">
+  <meta name="twitter:description" content="  Java 虚拟机">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="Java 虚拟机学习笔记">
-  <meta property="og:description" content="  Java 虚拟机  什么是 ClassLoader">
+  <meta property="og:description" content="  Java 虚拟机">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -162,7 +162,6 @@
   <section class="post">
     <ul>
   <li>Java 虚拟机</li>
-  <li>什么是 ClassLoader</li>
 </ul>
 
 <hr />
@@ -211,152 +210,6 @@ Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Jav
    - Native OS
 </code></pre></div></div>
 
-<h2 id="什么是-classloader">什么是 ClassLoader</h2>
-
-<blockquote>
-  <p>ClassLoader 工作在 Class 装载的加载阶段，其主要作用是从系统外部获得 Class 二进制数据流，所有的 Class 都是由 ClassLoader 进行加载的， 
-ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统， 然后交给 Java 虚拟机进行连接，初始化等操作</p>
-</blockquote>
-
-<h3 id="classloader-的类别">ClassLoader 的类别</h3>
-
-<ol>
-  <li>
-    <p>BoostrapClassLoader: 加载核心库 Java.*</p>
-
-    <p>(主要作用是负责加载 Java 自带的核心类，e.g: java.lang.xx 中的类都是由 BootstrapClassLoader 负责加载，通常这些核心类都是被签名的， 不能被替换， 是由 JVM 内核实现的， 目前在 HotspotVM 中是由 C++ 来实现，有了它加载最核心的内容， 才会有后面的 ClassLoader 存在)</p>
-  </li>
-  <li>
-    <p>ExtClassLoader (extends URLClassLoader, 获取 class 文件的路径： “java.ext.dirs”)</p>
-
-    <p>用户可见的 ClassLoader，用于加载位于 JRE 外 ext 目录下的 jar 包 （加载扩展库 javax.*) ， 用户也可以将自己自定义的 jar 包放到 该目录下，通过 ExtClassLoader 进行加载；</p>
-  </li>
-  <li>
-    <p>AppClassLoader(extends URLClassLoader, “java.class.path”);)</p>
-
-    <p>用来加载 ClassPath 下的文件，类路径</p>
-  </li>
-  <li>
-    <p>自定义 ClassLoader: (可能不在系统的 classpath 范围内， 也可以指定在范围内) Java 编写，定制化加载</p>
-  </li>
-</ol>
-
-<h3 id="自定义-classloader-如何实现">自定义 ClassLoader 如何实现：</h3>
-
-<p>几个关键函数:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="n">loadClass</span><span class="o">()</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="c1">// findClass() 作用：根据位置/名称 加载 .class 字节码</span>
-     <span class="kd">protected</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">findCLass</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">){}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="c1">// 调用 defineClass() 解析定义 .class 字节流，返回 class 对象</span>
-     <span class="c1">// 重新定义和生成类</span>
-     <span class="c1">// byte[] class 字节码</span>
-     <span class="kd">protected</span> <span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">defineClass</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span><span class="o">,</span> <span class="kt">int</span> <span class="n">off</span><span class="o">,</span> <span class="kt">int</span> <span class="n">len</span><span class="o">){</span>
-       <span class="k">return</span> <span class="nf">defineClass</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">off</span><span class="o">,</span> <span class="n">len</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-     <span class="o">}</span>
-</code></pre></div></div>
-
-<p>exp:</p>
-
-<p>首先在项目外部任意一个 path 下创建一个 java 文件</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Walle</span> <span class="o">{</span>
-   	<span class="kd">static</span><span class="o">{</span>
-   		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">);</span>
-   	<span class="o">}</span>
-   <span class="o">}</span>
-   
-</code></pre></div></div>
-
-<p>然后通过 javac 编译 *.java 文件，生成 *.class 文件</p>
-
-<p>通过自定义 ClassLoader 加载、解析 *.class 文件</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="cm">/**
-    * @author ercargo  on 2020/4/4
-    * @DESCRIBE 定义一个自定义 classLoader
-    */</span>
-   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyCLassLoader</span> <span class="kd">extends</span> <span class="n">ClassLoader</span> <span class="o">{</span>
-       <span class="kd">private</span> <span class="n">String</span> <span class="n">path</span><span class="o">;</span>
-       <span class="kd">private</span> <span class="n">String</span> <span class="n">classLoaderName</span><span class="o">;</span>
-   
-       <span class="kd">public</span> <span class="nf">MyCLassLoader</span><span class="o">(</span><span class="n">String</span> <span class="n">path</span><span class="o">,</span> <span class="n">String</span> <span class="n">classLoaderName</span><span class="o">)</span> <span class="o">{</span>
-           <span class="k">this</span><span class="o">.</span><span class="na">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">;</span>
-           <span class="k">this</span><span class="o">.</span><span class="na">classLoaderName</span> <span class="o">=</span> <span class="n">classLoaderName</span><span class="o">;</span>
-       <span class="o">}</span>
-   
-       <span class="c1">// 查找类文件</span>
-       <span class="nd">@Override</span>
-       <span class="kd">public</span> <span class="n">Class</span> <span class="nf">findClass</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-           <span class="kt">byte</span><span class="o">[]</span> <span class="n">b</span> <span class="o">=</span> <span class="n">loadClassData</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
-           <span class="k">return</span> <span class="nf">defineClass</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
-       <span class="o">}</span>
-   
-       <span class="c1">// 用于加载类文件</span>
-       <span class="kd">private</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">loadClassData</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-           <span class="c1">// 路径找到对应的 class 文件</span>
-           <span class="n">name</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">".class"</span><span class="o">;</span>
-   
-           <span class="c1">// 输入流读取文件</span>
-           <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-           <span class="c1">// byte 作为接收，输出</span>
-           <span class="n">ByteArrayOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-   
-           <span class="k">try</span> <span class="o">{</span>
-               <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">name</span><span class="o">));</span>
-               <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
-   
-               <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-               <span class="c1">// 循环读取文件</span>
-               <span class="k">while</span> <span class="o">((</span><span class="n">i</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
-                   <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
-               <span class="o">}</span>
-   
-   
-           <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-               <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-           <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-               <span class="k">try</span> <span class="o">{</span>
-                   <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-                   <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-               <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                   <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-               <span class="o">}</span>
-           <span class="o">}</span>
-           <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
-       <span class="o">}</span>
-   <span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="cm">/**
-    * @author ercargo  on 2020/4/4
-    * @DESCRIBE 校验自定义 ClassLoader 是否 work
-    */</span>
-   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassLoaderChecker</span> <span class="o">{</span>
-       <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ClassNotFoundException</span><span class="o">,</span> <span class="n">IllegalAccessException</span><span class="o">,</span> <span class="n">InstantiationException</span> <span class="o">{</span>
-           <span class="n">MyCLassLoader</span> <span class="n">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyCLassLoader</span><span class="o">(</span><span class="s">"/Users/ercargo/Desktop/"</span><span class="o">,</span><span class="s">"xxx"</span><span class="o">);</span>
-           <span class="n">Class</span> <span class="n">c</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="na">loadClass</span><span class="o">(</span><span class="s">"Walle"</span><span class="o">);</span>
-           <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getClassLoader</span><span class="o">());</span>
-           <span class="n">c</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
-       <span class="o">}</span>
-   <span class="o">}</span>
-</code></pre></div></div>
-
-<p>findClass() 不仅可以在自定义的目录下加载文件，也可以通过不同的形式进行加载， 只要保证调用 defineClass() 时传入的二进制字节流是合法的：</p>
-
-<ol>
-  <li>访问远程的网络获取二进制流；</li>
-  <li>对敏感文件进行加密, 在 findClass() 进行解密；</li>
-  <li>对生成的二进制流代码进行修改，给类添加一些信息（如： asm 就是用来改造二进制流的行为； 字节码增强技术； 动态代理、AOP 的实现）</li>
-</ol>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 引申思考「字节码增强技术」[Java字节码学习笔记](/2020/04/Java字节码学习笔记)
-</code></pre></div></div>
-
-
   </section>
 </article>
 
@@ -365,13 +218,13 @@ ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统�
     
     <div class="read-more-item">
         <span class="read-more-item-dim">最近的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" title="link to Java 反射实践">Java 反射实践</a></h2>
-        <p class="excerpt">Java 反射机制能够动态获取信息、动态调用对象方法，即：在运行过程中：  对任意一个「类」都能知道它的属性和方法；  对任意一个「对象」，都能调用它的任意方法和属性；e.g:public class RobotTest {    private String name;    public void sayHi(String helloSentence){        System.out.println(helloSentence + "" + name);    }    priv...&hellip;</p>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8BClassLoader/" title="link to Java 类加载之 ClassLoader">Java 类加载之 ClassLoader</a></h2>
+        <p class="excerpt">  JVM 的组成部分  什么是 ClassLoaderJVM 组成部分  Class Loader: 作用: 加载编译后的 class 文件到内存  RunTime Data Area: JVM 内存模型  Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行  Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用Q: JVM 如何加载 .class 文件A: JVM 由 4个部分组成，包括 ClassL...&hellip;</p>
         <div class="post-list__meta">
             <time datetime="2019-03-31 23:13:00 +0800" class="post-list__meta--date date">
                 2019-03-31
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/>继续阅读</a></div>
+                class="btn-border-small" href=/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8BClassLoader/>继续阅读</a></div>
     </div>
     
 
@@ -379,13 +232,13 @@ ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统�
     
     <div class="read-more-item">
         <span class="read-more-item-dim">更早的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/03/ThreadLocal/" title="link to 多线程之 ThreadLocal">多线程之 ThreadLocal</a></h2>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/" title="link to 多线程之 ThreadLocal">多线程之 ThreadLocal</a></h2>
         <p class="excerpt">  Pre talk  ThreadLocal 是什么？解决了什么问题？  ThreadLocal 源码分析及实现原理  ThreadLocal 内存泄漏问题  InheritableThreadLocal 的实现原理Pre talk线程封闭技术访问共享可变数据时，通常需要使用同步，同步会产生性能问题，如何避免使用同步的方式来保证线程安全问题 – 不共享数据， 如何保证数据不共享呢？如果仅仅是在单线程内访问数据，就不会存在数据共享的问题，也就不需要数据同步。 (线程封闭: Thread C...&hellip;</p>
         <div class="post-list__meta">
             <time datetime="2019-03-30 16:39:00 +0800" class="post-list__meta--date date">
                 2019-03-30
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/03/ThreadLocal/>继续阅读</a></div>
+                class="btn-border-small" href=/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/>继续阅读</a></div>
     </div>
     
 </section>
@@ -401,7 +254,7 @@ ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统�
         <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-04 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-05 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
     </footer>
 </section>

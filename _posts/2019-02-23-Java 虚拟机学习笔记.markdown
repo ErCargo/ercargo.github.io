@@ -1,0 +1,47 @@
+---
+layout: post
+title: Java 虚拟机学习笔记
+date: 2019-03-31 23:13
+---
+
+- Java 虚拟机
+
+
+------------------------------------------------------------------------------------------------
+## Java 虚拟机
+> 虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；
+> Java 虚拟机 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
+> Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行
+
+    Java 程序之所以可以「一次编译，到处运行」 原因是: 
+    - Java 虚拟机对各种不同的操作系统/平台进行了定制；
+    - 无论在什么平台都可以编译生成固定的字节码（.class 文件）供 JVM 使用
+
+JVM 是一个内存中的虚拟机，JVM 的存储就是内存，所有 类、常量、变量、方法都在内存中。
+
+JVM 的组成部分：
+
+![Java 虚拟机](/assets/images/javavm.jpg)
+
+1. Class Loader: 作用: 加载编译后的 class 文件到内存
+2. RunTime Data Area: JVM 内存模型
+3. Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行
+4. Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用
+
+Q: JVM 如何加载 .class 文件
+
+    A: JVM 由 4个部分组成，包括 ClassLoader, Runtime Data Area, Execution Engine 和 Native Interface；
+    主要通过 ClassLoader 将符合虚拟机规范的 class 文件加载到内存中， 再通过 Execution Engine 解析 Class 文件中的字节码，
+    提交给操作系统执行
+
+思考：类从编译到执行的过程
+      
+ ![Java 运行示意图(摘自其他网站)](/assets/images/javac.jpg)
+      
+      *.java file  --> Java Compiler(javac) --> *.class file --> Java Virtual Machine
+      
+      Java Virtual Machine: 
+       - ClassLoader
+       - ByteCode Verifier
+       - Java Runtime System
+       - Native OS

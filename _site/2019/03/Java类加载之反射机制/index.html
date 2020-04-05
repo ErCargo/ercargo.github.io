@@ -5,16 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>Java 反射实践</title>
+  <title>Java 类加载之反射机制</title>
   <meta name="description" content="Java 反射机制">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Java 反射实践">
+  <meta name="twitter:title" content="Java 类加载之反射机制">
   <meta name="twitter:description" content="Java 反射机制">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Java 反射实践">
+  <meta property="og:title" content="Java 类加载之反射机制">
   <meta property="og:description" content="Java 反射机制">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
+  <link rel="canonical" href="http://localhost:4000/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/">
   <link rel="alternate" type="application/rss+xml" title="ErCargo's Coffee Time" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -156,7 +156,7 @@
     <div class="post-meta">
       <time datetime="2019-03-31 23:13:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-03-31</time> &#8226; <span class="post-meta__tags tags"></span>
     </div>
-    <h1 class="post-title">Java 反射实践</h1>
+    <h1 class="post-title">Java 类加载之反射机制</h1>
   </header>
 
   <section class="post">
@@ -242,13 +242,13 @@
     
     <div class="read-more-item">
         <span class="read-more-item-dim">更早的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/03/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="link to Java 虚拟机学习笔记">Java 虚拟机学习笔记</a></h2>
-        <p class="excerpt">  Java 虚拟机  什么是 ClassLoaderJava 虚拟机  虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；Java 虚拟机 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行Java 程序之所以可以「一次编译，到处运行」 原因是: - Java 虚拟机对各种不...&hellip;</p>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8BClassLoader/" title="link to Java 类加载之 ClassLoader">Java 类加载之 ClassLoader</a></h2>
+        <p class="excerpt">  JVM 的组成部分  什么是 ClassLoaderJVM 组成部分  Class Loader: 作用: 加载编译后的 class 文件到内存  RunTime Data Area: JVM 内存模型  Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行  Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用Q: JVM 如何加载 .class 文件A: JVM 由 4个部分组成，包括 ClassL...&hellip;</p>
         <div class="post-list__meta">
             <time datetime="2019-03-31 23:13:00 +0800" class="post-list__meta--date date">
                 2019-03-31
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/03/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>继续阅读</a></div>
+                class="btn-border-small" href=/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8BClassLoader/>继续阅读</a></div>
     </div>
     
 </section>
@@ -264,7 +264,7 @@
         <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-04 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-05 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
     </footer>
 </section>

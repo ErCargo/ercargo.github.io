@@ -5,9 +5,53 @@
     <description>Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 04 Apr 2020 22:59:55 +0800</pubDate>
-    <lastBuildDate>Sat, 04 Apr 2020 22:59:55 +0800</lastBuildDate>
+    <pubDate>Sun, 05 Apr 2020 21:19:15 +0800</pubDate>
+    <lastBuildDate>Sun, 05 Apr 2020 21:19:15 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>设计模式</title>
+        <description>
+</description>
+        <pubDate>Sun, 05 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/04/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>算法!算法!</title>
+        <description>
+</description>
+        <pubDate>Sun, 05 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/04/%E7%AE%97%E6%B3%95!%E7%AE%97%E6%B3%95!/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/%E7%AE%97%E6%B3%95!%E7%AE%97%E6%B3%95!/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Spring技术内幕学习笔记</title>
+        <description>
+</description>
+        <pubDate>Sat, 04 Apr 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/04/Spring%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/Spring%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Redis</title>
+        <description>
+</description>
+        <pubDate>Tue, 31 Mar 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/03/Redis/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/Redis/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Java 字节码学习笔记</title>
@@ -49,18 +93,6 @@
 
 &lt;blockquote&gt;
   &lt;p&gt;JVM 要求字节码文件必须由一下 10 个部分按照顺序组成：&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;魔数&lt;/li&gt;
-    &lt;li&gt;版本号&lt;/li&gt;
-    &lt;li&gt;常量池&lt;/li&gt;
-    &lt;li&gt;访问标志&lt;/li&gt;
-    &lt;li&gt;当前类索引&lt;/li&gt;
-    &lt;li&gt;父类索引&lt;/li&gt;
-    &lt;li&gt;接口索引&lt;/li&gt;
-    &lt;li&gt;字段表&lt;/li&gt;
-    &lt;li&gt;方法表&lt;/li&gt;
-    &lt;li&gt;附加属性&lt;/li&gt;
-  &lt;/ul&gt;
 &lt;/blockquote&gt;
 
 &lt;h4 id=&quot;魔数magic&quot;&gt;魔数（Magic）&lt;/h4&gt;
@@ -77,7 +109,7 @@
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;常量池中存储 2 类常量： 字面量&amp;amp;符号引用。
 字面量： 代码中声明为 final 的常量值；
 符号引用： 类/接口的全局限定名、字段名称和描述符、方法名称和描述符
-常量池整体分为 2 个部分： 常量池计数器 和 常量池数据区
+常量池整体分为 2 个部分： 描述常量池计数器 和 常量池数据区
 
 - 常量池计数器： 常量的数量是不固定的， 所以先放置 2 个字节来表示常量池的容量计数值
 - 常量池数据区： N 个字节来描述代码中的常量， 可以通过javap -verbose xxx 来查看 JVM 反编译后的完整常量池。
@@ -96,14 +128,52 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;接口索引interfaces&quot;&gt;接口索引（interfaces）&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2 个字节的接口计数器， 描述了该类/父类实现的接口数量，N 个字节描述所有接口名称的字符串常量的索引值
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;字段表fields&quot;&gt;字段表（fields）&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;描述类和接口中声明的变量，但不包含方法内部声明的局部变量
+字段表分为 2 个部分：描述字段个数和字段详细信息
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;方法表methods&quot;&gt;方法表（methods）&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;方法表分为 2 部分组成，描述方法的个数 和 每个方法的详细信息
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;附加属性attributes&quot;&gt;附加属性（attributes）&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;类或接口所定义属性的基本信息
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;什么是「字节码增强技术」 就是对现有字节码进行修改/动态生成全新字节码文件的技术。&lt;/p&gt;
+&lt;h3 id=&quot;操作数栈和字节码&quot;&gt;操作数栈和字节码&lt;/h3&gt;
+&lt;p&gt;JVM 指令集基于栈进行操作而不是在寄存器中操作，
+原因是：基于栈可以有很好的跨平台性（因为寄存器指令集往往和硬件挂钩）
+但是缺点是：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;要完成同样的操作，基于栈的实现需要更多指令才能完成（因为栈是一个 FIFO 结构， 需要频繁的压栈出栈）&lt;/li&gt;
+  &lt;li&gt;栈的速度慢很多因为：
+    &lt;ul&gt;
+      &lt;li&gt;栈是在内存实现&lt;/li&gt;
+      &lt;li&gt;寄存器是在 CPU 的高速缓存区&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但是为了跨平台只好作出牺牲&lt;/p&gt;
+
+&lt;p&gt;操作码，操作集合 控制的都是 JVM 的操作数栈&lt;/p&gt;
+
+&lt;h2 id=&quot;什么是字节码增强&quot;&gt;什么是「字节码增强」&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;就是对「现有字节码」进行修改/动态生成「全新字节码」文件的技术。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;「字节码增强技术」应用场景:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring AOP&lt;/li&gt;
+  &lt;li&gt;ORM 框架&lt;/li&gt;
+  &lt;li&gt;热部署&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/bytecode.jpg&quot; alt=&quot;字节码增强技术(摘自其他网站)&quot; /&gt;&lt;/p&gt;
 
@@ -117,12 +187,206 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;「字节码增强技术」应用场景:&lt;/p&gt;
+&lt;h3 id=&quot;asm&quot;&gt;ASM:&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ASM 手动操纵字节码。可以直接生产 .class 文件，也可以在类被加载入 JVM 前动态修改&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ASM 的应用场景：AOP（Cglib 就是基于 ASM）、热部署、修改其他 jar 包中的类等。&lt;/p&gt;
+
+&lt;p&gt;ASM 的 2 种 API(ASM 的处理流程【访问者模式】，主要用于修改或操作一些数据结构比较稳定的数据)&lt;/p&gt;
+
+&lt;h4 id=&quot;asm-api&quot;&gt;ASM API&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ASM Core API 可以类比解析 XML 文件中的 SAX 方式， 不需要把这个类的整个结构读取出来， 用流式的方法来处理字节码文件
+好处：节约内存，性能强大
+缺点：编程难度大
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ASM Core API 中几个关键的类：&lt;/p&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;Spring AOP&lt;/li&gt;
-  &lt;li&gt;ORM 框架&lt;/li&gt;
-  &lt;li&gt;热部署&lt;/li&gt;
+  &lt;li&gt;ClassReader:&lt;/li&gt;
+  &lt;li&gt;ClassWriter:&lt;/li&gt;
+  &lt;li&gt;各种 Visitor: MethodVisitor(访问方法), FieldVisitor（访问类变量）, AnnotationVisitor（访问注解）&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ASM Tree API 类比解析 XML 文件的 DOM 方式， 把整个类的结构读取到内存中， 编程较简单，
+TreeAPI 通过各种 Node 类来映射字节码各个区域， 类比 DOM 节点。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;利用-asm-core-api实现-aop&quot;&gt;利用 ASM （Core API）实现 AOP&lt;/h5&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Base&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;process&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Generator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//TODO 这一步在读取 类的时候有问题， 暂时还没找到原因，不知道为啥&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ClassReader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Users/ercargo/ErCargo/concurrency/src/main/java/com/ercargo/asmbase/Base&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ClassWriter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;COMPUTE_MAXS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;ClassVisitor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visitor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClassVisitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;reader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;visitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SKIP_DEBUG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toByteArray&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;File&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Users/ercargo/ErCargo/concurrency/src/main/java/com/ercargo/asmbase/Base.class&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FileOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;generate success&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClassVisitor&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassVisitor&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Opcodes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyClassVisitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ClassVisitor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classVisitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ASM5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;classVisitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;visit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;superName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interfaces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;superName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;interfaces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// 判断当前字节码读到什么地方， 跳过 init 方法， 将需要被增强的类交给内部类 MyMethodVisitor 来处理&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MethodVisitor&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;visitMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exceptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;MethodVisitor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;visitMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exceptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 不对构造方法进行字节码增强（Base Class 中包含 2 个方法， 一个是自定义的 process 方法， 一个是构造方法）&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;init&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyMethodVisitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;cm&quot;&gt;/**
+     * 重写 MyMethodVisitor 中的两个方法，就可以实现 AOP
+     */&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyMethodVisitor&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MethodVisitor&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Opcodes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MyMethodVisitor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MethodVisitor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Opcodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ASM5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// 内部类，visitorCode() 方法， 会在 ASM 开始访问某一个方法的 code 区时被调用，重写 visitCode() 方法， 将 AOP 的前置逻辑放在这里&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;visitCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitFieldInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GETSTATIC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;java/lang/System&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ljava/io/PrintStream&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitLdcInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitMethodInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INVOKEVIRTUAL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;java/io/PrintStream&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;println&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;(Ljava/lang/String;)V&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;cm&quot;&gt;/**
+         * 继续读取 字节码指令， 每当 ASM 访问到「无参数指令」时， 都会调用 MyMethodVisitor 中的 visitInsn() 方法；
+         * 判断当前指令是否为无参数的 return 指令， 如果是，就在前面添加一些指令，就是将 AOP 的后置逻辑放在该方法中
+         * 通过调用 methodVisitor 的 visitXXXInsn() 方法就可以实现字节码的插入（XXX 对应是 操作码助记符）
+         * @param opcode
+         */&lt;/span&gt;
+        &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;visitInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opcode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opcode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Opcodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;IRETURN&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opcode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Opcodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RETURN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;opcode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Opcodes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ATHROW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitFieldInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GETSTATIC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;java/lang/System&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;out&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Ljava/io/PrintStream&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitLdcInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;end&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitMethodInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INVOKEVIRTUAL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;java/io/PrintStream&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;println&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;(Ljava/lang/String;)V&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;mv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;visitInsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opcode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;javassist&quot;&gt;Javassist&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ASM 是在指令层次上操作字节码，而 Javassist 是在源代码层次操作字节码的&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;最重要的几个类：ClassPool  CtClass  CtMethod  CtField&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * @author ercargo  on 2019/4/5
+ * @DESCRIBE
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JavassistTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CannotCompileException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IllegalAccessException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;InstantiationException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ClassPool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDefault&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 用类的全限定名&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;CtClass&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.ercargo.asmbase.Base&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;CtMethod&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDeclaredMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;process&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;insertBefore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{System.out.println(\&quot;start\&quot;);}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;insertAfter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{System.out.println(\&quot;end\&quot;);}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;cc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;writeFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/Users/ercargo/Desktop&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Base&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;运行时类的重载&quot;&gt;运行时类的重载&lt;/h2&gt;
+
+&lt;p&gt;如果 JVM 已经先加载了一个类， 然后对其字节码进行修改会发生什么呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/runtime_load_class_exception.jpg&quot; alt=&quot;报错&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;instrument&quot;&gt;Instrument&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Instrument 就是 JVM 提供的可以修改已加载的类的类库&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;实验: 在一个持续运行并且已经加载了所有类的 JVM 中， 如何利用字节码增强技术对类的行为作替换并重新加载。&lt;/p&gt;
+
+&lt;p&gt;JPDA（Java Platform Debugger Architecture）
+JVM  启动时开启 JPDA 那么类是被允许重新加载的。&lt;/p&gt;
+
+&lt;p&gt;JPDA 定义了一套完整的体系，将「调试」分为 3 部分， 并规定了 3 者之间的通信接口， 3 部分由高到低分别为：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Java 虚拟机工具接口（ JVMTI ( JVM tool interface ) ）&lt;/p&gt;
+
+    &lt;p&gt;JVMTI 是 JVM 提供的一套对 JVM 进行操作的工具接口， 通过 JVMTI 可以实现对 JVM 的多种操作， 它通过注册各种事件勾子， 在 JVM 触发时同时触发预定义的勾子， 以实现对各个 JVM 事件的响应，事件包括：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- 类文件加载；
+- 异常产生与捕获；
+- 线程启动与结束；
+- 进入和退出临界区；
+- 成员变量修改；
+- GC 开始和结束；
+- 方法调用进入和退出；
+- 临界区竞争与等待；
+- VM 启动与退出
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Agent 就是 JVMTI 的一种实现，Agent 有 2 种启动方式：&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. 随着 java 进程启动而启动（ Java -agentlib ）；
+2. 运行时载入， 通过 attach API， 将 jar 动态地 Attach 到 指定进程 id 的 Java 进程内
+  
+Attach API 作用是提供 JVM 之间的通信能力， 比如为了让另外一个 JVM 进程把线程服务的线程 Dump 出来， 会运行 jstack 或 jmap 的进程， 传递 pid 参数， Attach API 也能实现
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Java 调试协议（JDWP）&lt;/li&gt;
+  &lt;li&gt;Java 调试接口（JDI）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;依赖 JVMTI 的 Attach API 机制实现&lt;/p&gt;
+
+&lt;p&gt;ClassFileTransformer 接口&lt;/p&gt;
+
+&lt;p&gt;原文参考：https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html&lt;/p&gt;
 </description>
         <pubDate>Tue, 30 Apr 2019 16:39:00 +0800</pubDate>
         <link>http://localhost:4000/2019/04/Java%E5%AD%97%E8%8A%82%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
@@ -132,7 +396,7 @@
       </item>
     
       <item>
-        <title>Java 反射实践</title>
+        <title>Java 类加载之反射机制</title>
         <description>&lt;h2 id=&quot;java-反射机制&quot;&gt;Java 反射机制&lt;/h2&gt;
 
 &lt;p&gt;能够动态获取信息、动态调用对象方法，即：
@@ -194,37 +458,20 @@
 
 </description>
         <pubDate>Sun, 31 Mar 2019 23:13:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</guid>
+        <link>http://localhost:4000/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/</guid>
         
         
       </item>
     
       <item>
-        <title>Java 虚拟机学习笔记</title>
+        <title>Java 类加载之 ClassLoader</title>
         <description>&lt;ul&gt;
-  &lt;li&gt;Java 虚拟机&lt;/li&gt;
+  &lt;li&gt;JVM 的组成部分&lt;/li&gt;
   &lt;li&gt;什么是 ClassLoader&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;hr /&gt;
-&lt;h2 id=&quot;java-虚拟机&quot;&gt;Java 虚拟机&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；
-Java 虚拟机 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
-Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Java 程序之所以可以「一次编译，到处运行」 原因是: 
-- Java 虚拟机对各种不同的操作系统/平台进行了定制；
-- 无论在什么平台都可以编译生成固定的字节码（.class 文件）供 JVM 使用
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;JVM 是一个内存中的虚拟机，JVM 的存储就是内存，所有 类、常量、变量、方法都在内存中。&lt;/p&gt;
-
-&lt;p&gt;JVM 的组成部分：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/javavm.jpg&quot; alt=&quot;Java 虚拟机&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;jvm-组成部分&quot;&gt;JVM 组成部分&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Class Loader: 作用: 加载编译后的 class 文件到内存&lt;/li&gt;
@@ -232,6 +479,8 @@ Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Jav
   &lt;li&gt;Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行&lt;/li&gt;
   &lt;li&gt;Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/javavm.jpg&quot; alt=&quot;Java 虚拟机&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Q: JVM 如何加载 .class 文件&lt;/p&gt;
 
@@ -398,6 +647,185 @@ ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统�
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 引申思考「字节码增强技术」[Java字节码学习笔记](/2020/04/Java字节码学习笔记)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;h2 id=&quot;classloader-的双亲委派机制parent&quot;&gt;ClassLoader 的双亲委派机制（parent）&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;不同的 ClassLoader 加载类的方式和路径是不同的，为了实现分工， 各自负责各自的区块， 使得逻辑更明确&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;为什么叫双亲委派模型？
+
+该模型中除了 最顶层的 BootstrapClassLoader, 其余的 ClassLoader 都有自己的 父类 ClassLoader 但这个父子关系是由 「组合」 而不是继承来实现的
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;自底而上的检查类是否已被加载
+    &lt;ul&gt;
+      &lt;li&gt;从自定义 ClassLoader 开始查看是否某个类被加载过，&lt;/li&gt;
+      &lt;li&gt;没有就去 AppClassLoader 去查找，&lt;/li&gt;
+      &lt;li&gt;没有再继续到 ExtClassLoader 查找，&lt;/li&gt;
+      &lt;li&gt;直到 BootStrapClassLoader&lt;/li&gt;
+      &lt;li&gt;如果还是没有就会继续按照下面「自顶向下」 的方式查找&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;自顶向下的尝试加载类
+    &lt;ul&gt;
+      &lt;li&gt;委派给 BootstrapLoader Load JRE\lib\rt.jar  或 Xbootclasspath 选项指定的 jar 包&lt;/li&gt;
+      &lt;li&gt;如果没有就委派给 ExtClassLoader Load JRE\lib\ext*.jar  或 -Djava.ext.dirs 指定目录下的 jar 包&lt;/li&gt;
+      &lt;li&gt;如果没有就委派给 AppClassLoader Load CLASSPATH 或 -Djava.class.path 指定目录下的类和 jar 包&lt;/li&gt;
+      &lt;li&gt;如果没有就通过 java.lang.ClassLoader 的子类自定义加载 class&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;为什么要用双亲委派机制去加载类？
+为了避免多份同样的字节码被加载；&lt;/p&gt;
+
+&lt;p&gt;JDK 中也有较大规模的破坏双亲模型的情况，如： 线程上下文类加载器（Thread Context ClassLoader）&lt;/p&gt;
+
+&lt;h2 id=&quot;类的加载方式&quot;&gt;类的加载方式&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;隐式加载 new: 程序在运行过程中遇到 new 生成对象，会隐式调用「类加载器」加载对应的类到 jvm 中； new xxx(yyy) 支持传参数&lt;/li&gt;
+  &lt;li&gt;显示加载 loadClass(), Class.forName()
+显示加载， 当获取 class 对象后， 需要调用 class 对象的 newInstance() 方法来生成对象的实例   xxx.newInstance() 不支持参数传入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;loadclass-和-classforname-的区别&quot;&gt;loadClass 和 Class.forName() 的区别&lt;/h3&gt;
+
+&lt;p&gt;相同点：在运行过程中对于任意一个类都能直到该类的属性和方法， 对于任意一个对象，都能调用它的任意方法和属性&lt;/p&gt;
+
+&lt;p&gt;类的装载过程：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;加载: ClassLoader 加载 Class 文件字节码到内存中， 并将「静态数据」转化成「运行时数据区」中&lt;strong&gt;方法区&lt;/strong&gt;的类型数据，在运行时数据区的堆中， 生成一个代表这个类的 java.lang.class 对象 作为方法区内的数据访问入口；&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;链接: （resolve: true）&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;校验: 检查加载 class 文件的正确性和安全性;&lt;/li&gt;
+      &lt;li&gt;准备: 为类变量分配存储空间、设置类变量初始值；类变量（static 变量）随类型信息存放在方法区中，生命周期很长，使用不当很容易造成内存泄漏&lt;/li&gt;
+      &lt;li&gt;解析: JVM 将常量池内的符号引用转换为直接引用&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;初始化: 执行类变量赋值和静态代码块&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参照上述的类装载过程，分析源码得出:&lt;/p&gt;
+
+&lt;p&gt;Class.forName 得到的 class 是已经初始化完成的
+initialize: true&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/forName.jpg&quot; alt=&quot;Java forName&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ClassLoader.loadClass 得到的 class 是还没有 链接的，只是进行了加载
+resolve: false&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/loadClass.jpg&quot; alt=&quot;Java loadClass&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;实验:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Base&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;process&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;静态代码块被执行（类变量准备）&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClassLoaderTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ClassLoader&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClassLoader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;执行结果：
+静态代码块未被加载，表示类变量未被初始化（未链接）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/static.jpg&quot; alt=&quot;Java static&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClassLoaderTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ClassNotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//        ClassLoader c = Base.class.getClassLoader();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.ercargo.asmbase.Base&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;执行结果：&lt;/p&gt;
+
+&lt;p&gt;说明 Class.forName() 会初始化类
+&lt;img src=&quot;/assets/images/forname_class.jpg&quot; alt=&quot;Java forname class&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;e.g: Mysql Driver(com.mysql.jdbc.Driver) 需要用 forName 才能执行到 Driver 类中的静态代码块&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Spring Ioc 资源加载器获取要读入的资源时（读取写 Bean 的配置文件时 ），如果时以 Classpath 的方式加载， 就需要使用 ClassLoader.loadClass() 来加载， 
+这和 Spring Ioc 的 lazy loading 相关（延迟加载）， Spring Ioc 为了加快初始化速度，大量使用了延时加载技术， ClassLoader 就是不需要执行「初始化」代码等步骤（只需要将 class 字节码加载进内存）
+这样可以加快类的加载速度， 等到真正使用这个类的时候，才进行类的初始化， 链接等工作。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Sun, 31 Mar 2019 23:13:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8BClassLoader/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8BClassLoader/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Java 虚拟机学习笔记</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;Java 虚拟机&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;java-虚拟机&quot;&gt;Java 虚拟机&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；
+Java 虚拟机 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
+Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Java 程序之所以可以「一次编译，到处运行」 原因是: 
+- Java 虚拟机对各种不同的操作系统/平台进行了定制；
+- 无论在什么平台都可以编译生成固定的字节码（.class 文件）供 JVM 使用
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;JVM 是一个内存中的虚拟机，JVM 的存储就是内存，所有 类、常量、变量、方法都在内存中。&lt;/p&gt;
+
+&lt;p&gt;JVM 的组成部分：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/javavm.jpg&quot; alt=&quot;Java 虚拟机&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Class Loader: 作用: 加载编译后的 class 文件到内存&lt;/li&gt;
+  &lt;li&gt;RunTime Data Area: JVM 内存模型&lt;/li&gt;
+  &lt;li&gt;Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行&lt;/li&gt;
+  &lt;li&gt;Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Q: JVM 如何加载 .class 文件&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A: JVM 由 4个部分组成，包括 ClassLoader, Runtime Data Area, Execution Engine 和 Native Interface；
+主要通过 ClassLoader 将符合虚拟机规范的 class 文件加载到内存中， 再通过 Execution Engine 解析 Class 文件中的字节码，
+提交给操作系统执行
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;思考：类从编译到执行的过程&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/javac.jpg&quot; alt=&quot;Java 运行示意图(摘自其他网站)&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  *.java file  --&amp;gt; Java Compiler(javac) --&amp;gt; *.class file --&amp;gt; Java Virtual Machine
+  
+  Java Virtual Machine: 
+   - ClassLoader
+   - ByteCode Verifier
+   - Java Runtime System
+   - Native OS
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Sun, 31 Mar 2019 23:13:00 +0800</pubDate>
         <link>http://localhost:4000/2019/03/Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
@@ -460,30 +888,8 @@ ClassLoader 负责通过将 Class 文件中的二进制数据流装载进系统�
 
 </description>
         <pubDate>Sat, 30 Mar 2019 16:39:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/ThreadLocal/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/ThreadLocal/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Redis</title>
-        <description>
-</description>
-        <pubDate>Tue, 26 Mar 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/Redis/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/Redis/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Spring技术内幕学习笔记</title>
-        <description>
-</description>
-        <pubDate>Mon, 25 Mar 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/Spring%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/Spring%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+        <link>http://localhost:4000/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/</guid>
         
         
       </item>
@@ -496,197 +902,6 @@ GC – Java垃圾回收&lt;/p&gt;
         <pubDate>Sun, 24 Mar 2019 13:45:00 +0800</pubDate>
         <link>http://localhost:4000/2019/03/%E8%81%8A%E8%81%8A-GC/</link>
         <guid isPermaLink="true">http://localhost:4000/2019/03/%E8%81%8A%E8%81%8A-GC/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>如何理解 java</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;java 的平台无关性&lt;/li&gt;
-  &lt;li&gt;面向对象&lt;/li&gt;
-  &lt;li&gt;Java 的语言特性&lt;/li&gt;
-  &lt;li&gt;java 类库&lt;/li&gt;
-  &lt;li&gt;GC&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;对于 Java 的理解，每个程序员都会有不同的见解，而且能够说出很多不同维度的理解，如果发散开来一篇文章是说不完的。
-所以，本文主要是从 Java 的几点特性出发，简单的聊聊对 Java 的理解， 会不断的补充进来&lt;/p&gt;
-
-&lt;h2 id=&quot;一java-的平台无关性&quot;&gt;一、Java 的平台无关性&lt;/h2&gt;
-&lt;p&gt;Java 平台无关性简单理解就是一次编译到处运行，即平台无关性。那么问题来了，java 是如何实现平台无关性的?&lt;br /&gt;
-通常 Java 程序运行会分为编译期和运行时 &lt;br /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;编译期：通过 Javac 指令，编译是指编译 Java 的源码(&lt;em&gt;.java文件编写的)，将源码编译生成字节码(存入到对应的&lt;/em&gt;.class文件)，&lt;/li&gt;
-  &lt;li&gt;运行时：通过 Java 指令执行字节码文件；(将字节码翻译成对应平台的机器码)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;反编译：Javap 指令是jdk自带的反汇编器，可以查看Java编译器为我们生成的字节码;
-    Javap -c 对字节码代码进行反汇编，将从*.class到可执行程序的过程逆过来, 查看 javac 生成的 class 文件的内容，就是将二进制文件转成 class 文件的过程;&lt;/p&gt;
-
-&lt;p&gt;实践：下面给出一段代码，然后简单介绍一下这段代码的执行过程：&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class ByteCodeTest {
-    public static void main(String[] args) {
-        int i = 1;
-        int j = 5;
-        i++;
-        System.out.println(i);
-        System.out.println(j);
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;javac 指令的执行方式：&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  javac + 类所在的文件路径 + 类名.java
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;执行会在与 *.Java 文件相同路径下生成 *.class 文件&lt;/p&gt;
-
-&lt;p&gt;生成的 class 文件:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Source&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recreated&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IntelliJ&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDEA&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;powered&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Fernflower&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decompiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ercargo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;concurrency&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javabasic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ByteCodeTest&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ByteCodeTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;byte&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;反编译的过程解析一下 class 文件：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;javap 是 jdk 自带反汇编器， 可以查看 java 编译器为我们生成的字节码;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/javap.jpg&quot; alt=&quot;javap指令执行方式&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;ps: 以上就是 java 虚拟机( HotSpot )所能理解的字节码&lt;/p&gt;
-
-&lt;p&gt;上述过程中 .class 文件中的字节码是 java 跨平台的核心和基础，Java 虚拟机可以解析该文件，转换成特定平台的执行指令（Linux,Windows,MacOS）&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;总的来说：Java 提供了各种不同平台上的虚拟机，jvm 可以将字节码文件加载到内存，并最终转换成当前操作系统能够识别的机器码去执行，从而实现了平台无关性；&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;二面向对象&quot;&gt;二、面向对象&lt;/h2&gt;
-&lt;p&gt;Java 具有面向对象语言的基本特性，封装、继承、多态，这里简单给出一点自己的见解，详细理解可以参考：
-&lt;a href=&quot;https://sophia.javeriana.edu.co/~cbustaca/docencia/POO-2016-01/documentos/Thinking_in_Java_4th_edition.pdf&quot;&gt;《Thinking in java》&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;封装: 封装是抽象具有相同特性和行为的对象集合，理解成对类的内部实现进行隐藏，对外界只暴露该类的访问方法&lt;/li&gt;
-    &lt;li&gt;继承: 基类重用超类代码&lt;/li&gt;
-    &lt;li&gt;多态: 后期绑定/动态绑定，OOP 中，程序直到运行时才能确定代码的地址，所以必须通过动态绑定，当像对象发送消息时，被调用的代码直到运行时才能确定。&lt;br /&gt;
-涉及到泛型的概念&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;注意这里有一个问题，我们在真正写代码的时候会经常用继承吗？继承会导致一些什么问题？&lt;br /&gt;
-&lt;a href=&quot;https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/&quot;&gt;《Effective Java》&lt;/a&gt;中提出一个概念：组合优于继承&lt;/p&gt;
-
-&lt;p&gt;为什么说组合优于继承呢？&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;继承：子类继承父类，即父类的内部细节(方法和属性)对子类都是可见的，如果父类发生改变，子类必然也要随之改变，所以会造成代码的耦合度非常高
-而且破坏代码的封装性，一般除了使用多态的情况(需要从新类向基类进行向上转型)，或者父类完全不会改变的情况（确认基类与超类之间存在的只有is-a的关系），
-都是不推荐使用继承的；
-组合是将现有对象进行拼装产生新的更复杂的功能，类的组合关系一般在运行期确定，如下面这段代码：
-```
-public class Teacher {
-    private double salary;
-    /**
-     * 将User和Teacher 组合，而不是Teacher继承User，
-     * User中的其他属性修改，不会直接影响Teacher
-     */
-    private User user;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public double getSalary() {
-    return salary;
-}
-
-public void setSalary(double salary) {
-    this.salary = salary;
-}
-
-public String getName(){
-   return user.getName();
-} } ```
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;三java-语言特性&quot;&gt;三、Java 语言特性&lt;/h2&gt;
-&lt;p&gt;关于 Java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
-本文简单介绍一下 java 的泛型和反射，后面深入学习之后再作总结。&lt;br /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Java 泛型，简单的理解就是将原先具体的参数类型的定义泛化，编译器负责转成特定类型。多态实际上就是一种泛化机制。&lt;/li&gt;
-  &lt;li&gt;Java 反射: 程序运行时，对任意一个类可以获取到类中的属性，方法； 对任意一个对象，可以调用他的方法。&lt;/li&gt;
-  &lt;li&gt;Java8 Lambda 表达式，支持函数式编程&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;四java基础类库&quot;&gt;四、Java基础类库&lt;/h2&gt;
-&lt;p&gt;Java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：&lt;a href=&quot;https://jdk.java.net/&quot;&gt;jdk&lt;/a&gt;&lt;br /&gt;
-比较重要的有：java 集合，java 并发库(J.U.C)， 网络库，IO，NIO 等等
-本文就不一一展开介绍，后续文章中会依次对这些重要的包进行总结。&lt;/p&gt;
-
-&lt;h2 id=&quot;五gc&quot;&gt;五、GC&lt;/h2&gt;
-&lt;p&gt;GC 是 Java 特性中的重点，也是面试经常被问到的问题。
-GC 简单来说就是 java 的垃圾回收，但是里面包含的内容非常多。谈到 GC, 必然要知道 JVM 的工作原理，内存结构。
-在&lt;a href=&quot;/2019/03/聊聊GC&quot;&gt;《聊聊 GC》&lt;/a&gt;这一篇中将会进行详细介绍。&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;文章内容主要是对自己学习的总结，还有很多需要深入挖掘的内容，To Be Continue&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;[参考引用]&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;《Thinking in Java》&lt;/li&gt;
-  &lt;li&gt;《剑指Java面试》&lt;/li&gt;
-  &lt;li&gt;《Effective Java》&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sun, 24 Mar 2019 13:45:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>排序算法简单实现</title>
-        <description>&lt;blockquote&gt;
-  &lt;p&gt;关于排序算法的文章很多，本人因为算法相当菜，所以看了很多相关的博客、书籍、视频等等，但是还是一知半解（无奈人笨没办法），
-那就自己先写一写吧，按照：先看懂原理，然后分析算法步骤，然后自己idea中实践，然后手写理解的方法，慢慢啃吧。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Sat, 23 Mar 2019 16:45:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>数据结构造轮子</title>
-        <description>&lt;h2 id=&quot;数组arraylist和链表linkedlist&quot;&gt;数组（ArrayList）和链表(LinkedList)&lt;/h2&gt;
-&lt;p&gt;数组和链表是Java中最核心的两个数据结构，对任何其他数据结构的理解，基于这两者，所以本文参照jdk8提供的源码，
-自己对2者进行了理解后简单的实现，给出自己的代码实现，很多不足之处有待优化。&lt;/p&gt;
-
-&lt;h3 id=&quot;1-数组&quot;&gt;1. 数组&lt;/h3&gt;
-
-&lt;h3 id=&quot;2-链表&quot;&gt;2. 链表&lt;/h3&gt;
-</description>
-        <pubDate>Fri, 22 Mar 2019 13:45:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%80%A0%E8%BD%AE%E5%AD%90/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%80%A0%E8%BD%AE%E5%AD%90/</guid>
         
         
       </item>

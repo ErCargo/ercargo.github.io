@@ -1,0 +1,320 @@
+---
+layout: post
+title: Java 字节码学习笔记
+date: 2019-04-30 16:39
+---
+
+- Java 字节码
+- Java 字节码结构
+- Java 字节码增强技术
+
+
+## Java 字节码
+
+### 为什么叫 Java 字节码？
+
+>  字节码文件由十六进制值组成， JVM 以 2 个十六进制值为 1组 进行读取, (2个16进制值表示一个字节）;
+
+> Java 可以一次编译，到处运行的原因：    
+> 1. JVM 针对各种操作系统、平台进行了定制；
+> 2. 无论在什么平台，都可以编译生成固定的字节码（.class 文件）供 JVM 使用
+
+**字节码很重要**
+
+通过字节码可以直观的看到 Volatile 关键字如何在字节码上生效？？
+
+JVM 字节码操作集合 --> Java 中操作字节码的框架
+
+## Java 字节码结构
+
+> 字节码文件是由一堆十六进制数组成；
+
+![字节码结构](/assets/images/cafebabe.jpg)
+
+
+> JVM 要求字节码文件必须由一下 10 个部分按照顺序组成：
+
+#### 魔数（Magic）
+    所有 .class 文件的前 4 个字节都是魔数，魔数的固定值为: 0xCAFEBABE. 魔数被放在文件开头， JVM 根据 文件开头来判断这个文件是否可能是 .class 文件 
+
+#### 版本号（Version）
+    版本号是魔数之后的 4 个字节， 前 2 个字节表示次版本号（Minor Version）， 后 2 个字节表示主版本号（Major Version）。
+    上图版本号为：「00 00 00 34」， 次版本号转化为十进制是 0 ， 主版本号转化为十进制是 52，Oracle 官网查询到序号 52 的版本号为 1.8 , 
+    所以编译该文件的 Java 版本号为 1.8
+
+#### 常量池（Constant_pool）
+    常量池中存储 2 类常量： 字面量&符号引用。
+    字面量： 代码中声明为 final 的常量值；
+    符号引用： 类/接口的全局限定名、字段名称和描述符、方法名称和描述符
+    常量池整体分为 2 个部分： 描述常量池计数器 和 常量池数据区
+    
+    - 常量池计数器： 常量的数量是不固定的， 所以先放置 2 个字节来表示常量池的容量计数值
+    - 常量池数据区： N 个字节来描述代码中的常量， 可以通过javap -verbose xxx 来查看 JVM 反编译后的完整常量池。
+
+#### 访问标志（access_flag）
+    2 个字节 描述该 class 是类还是接口，以及是否被 public, Abstract, Final 等修饰
+
+#### 当前类索引（this_class）
+    2个字节描述当前类的全限定名
+
+#### 父类索引（super_class）
+    2个字节描述父类的全限定名
+
+#### 接口索引（interfaces）
+    2 个字节的接口计数器， 描述了该类/父类实现的接口数量，N 个字节描述所有接口名称的字符串常量的索引值
+
+#### 字段表（fields）
+    描述类和接口中声明的变量，但不包含方法内部声明的局部变量
+    字段表分为 2 个部分：描述字段个数和字段详细信息
+
+#### 方法表（methods）
+    方法表分为 2 部分组成，描述方法的个数 和 每个方法的详细信息
+    
+#### 附加属性（attributes）
+    类或接口所定义属性的基本信息
+
+
+### 操作数栈和字节码
+JVM 指令集基于栈进行操作而不是在寄存器中操作，
+原因是：基于栈可以有很好的跨平台性（因为寄存器指令集往往和硬件挂钩）
+但是缺点是：
+1. 要完成同样的操作，基于栈的实现需要更多指令才能完成（因为栈是一个 FIFO 结构， 需要频繁的压栈出栈）
+2. 栈的速度慢很多因为：
+- 栈是在内存实现
+- 寄存器是在 CPU 的高速缓存区
+
+但是为了跨平台只好作出牺牲
+
+
+操作码，操作集合 控制的都是 JVM 的操作数栈
+
+
+## 什么是「字节码增强」 
+> 就是对「现有字节码」进行修改/动态生成「全新字节码」文件的技术。
+
+「字节码增强技术」应用场景: 
+- Spring AOP
+- ORM 框架
+- 热部署
+- ...
+      
+![字节码增强技术(摘自其他网站)](/assets/images/bytecode.jpg)
+     
+     - AOP
+     - CGLIB
+     - ASM
+     - AspectJ
+     - Java Proxy
+     - Javassist
+
+-------------------------------------------------------------  
+
+
+
+### ASM: 
+
+> ASM 手动操纵字节码。可以直接生产 .class 文件，也可以在类被加载入 JVM 前动态修改
+
+ASM 的应用场景：AOP（Cglib 就是基于 ASM）、热部署、修改其他 jar 包中的类等。
+
+ASM 的 2 种 API(ASM 的处理流程【访问者模式】，主要用于修改或操作一些数据结构比较稳定的数据)
+
+#### ASM API 
+    ASM Core API 可以类比解析 XML 文件中的 SAX 方式， 不需要把这个类的整个结构读取出来， 用流式的方法来处理字节码文件
+    好处：节约内存，性能强大
+    缺点：编程难度大
+    
+   ASM Core API 中几个关键的类：
+   
+   - ClassReader:
+   - ClassWriter:
+   - 各种 Visitor: MethodVisitor(访问方法), FieldVisitor（访问类变量）, AnnotationVisitor（访问注解）
+ 
+
+    ASM Tree API 类比解析 XML 文件的 DOM 方式， 把整个类的结构读取到内存中， 编程较简单，
+    TreeAPI 通过各种 Node 类来映射字节码各个区域， 类比 DOM 节点。
+
+##### 利用 ASM （Core API）实现 AOP
+```java
+public class Base {
+    public void process(){
+        System.out.println("process");
+    }
+}
+```
+
+```java
+public class Generator {
+    public static void main(String[] args) throws IOException {
+        //TODO 这一步在读取 类的时候有问题， 暂时还没找到原因，不知道为啥
+        ClassReader reader = new ClassReader("/Users/ercargo/ErCargo/concurrency/src/main/java/com/ercargo/asmbase/Base");
+        ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+
+        ClassVisitor visitor = new MyClassVisitor(writer);
+        reader.accept(visitor, ClassReader.SKIP_DEBUG);
+
+        byte[] data = writer.toByteArray();
+
+        File file = new File("/Users/ercargo/ErCargo/concurrency/src/main/java/com/ercargo/asmbase/Base.class");
+
+        FileOutputStream out = new FileOutputStream(file);
+        out.write(data);
+        out.close();
+        System.out.println("generate success");
+    }
+}
+```
+
+
+```java
+public class MyClassVisitor extends ClassVisitor implements Opcodes {
+
+    public MyClassVisitor(ClassVisitor classVisitor) {
+        super(ASM5, classVisitor);
+    }
+
+    @Override
+    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+        cv.visit(version, access, name, signature, superName, interfaces);
+    }
+
+    // 判断当前字节码读到什么地方， 跳过 init 方法， 将需要被增强的类交给内部类 MyMethodVisitor 来处理
+    @Override
+    public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+        MethodVisitor mv = visitMethod(access, name, desc, signature, exceptions);
+        // 不对构造方法进行字节码增强（Base Class 中包含 2 个方法， 一个是自定义的 process 方法， 一个是构造方法）
+        if (!name.equals("<init>") && mv != null) {
+            mv = new MyMethodVisitor(mv);
+        }
+        return mv;
+    }
+
+    /**
+     * 重写 MyMethodVisitor 中的两个方法，就可以实现 AOP
+     */
+    class MyMethodVisitor extends MethodVisitor implements Opcodes {
+        public MyMethodVisitor(MethodVisitor mv) {
+            super(Opcodes.ASM5, mv);
+        }
+
+        // 内部类，visitorCode() 方法， 会在 ASM 开始访问某一个方法的 code 区时被调用，重写 visitCode() 方法， 将 AOP 的前置逻辑放在这里
+        @Override
+        public void visitCode() {
+            super.visitCode();
+            mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream");
+            mv.visitLdcInsn("start");
+            mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+
+        }
+
+        /**
+         * 继续读取 字节码指令， 每当 ASM 访问到「无参数指令」时， 都会调用 MyMethodVisitor 中的 visitInsn() 方法；
+         * 判断当前指令是否为无参数的 return 指令， 如果是，就在前面添加一些指令，就是将 AOP 的后置逻辑放在该方法中
+         * 通过调用 methodVisitor 的 visitXXXInsn() 方法就可以实现字节码的插入（XXX 对应是 操作码助记符）
+         * @param opcode
+         */
+        @Override
+        public void visitInsn(int opcode) {
+            if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {
+                mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream");
+                mv.visitLdcInsn("end");
+                mv.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+            }
+
+            mv.visitInsn(opcode);
+        }
+    }
+}
+
+```
+
+
+### Javassist
+
+> ASM 是在指令层次上操作字节码，而 Javassist 是在源代码层次操作字节码的
+
+最重要的几个类：ClassPool  CtClass  CtMethod  CtField
+
+```java
+/**
+ * @author ercargo  on 2019/4/5
+ * @DESCRIBE
+ */
+public class JavassistTest {
+    public static void main(String[] args) throws NotFoundException, CannotCompileException, IOException, IllegalAccessException, InstantiationException {
+        ClassPool cp = ClassPool.getDefault();
+        // 用类的全限定名
+        CtClass cc = cp.get("com.ercargo.asmbase.Base");
+        CtMethod cm = cc.getDeclaredMethod("process");
+
+        cm.insertBefore("{System.out.println(\"start\");}");
+        cm.insertAfter("{System.out.println(\"end\");}");
+
+        Class c = cc.toClass();
+
+        cc.writeFile("/Users/ercargo/Desktop");
+        Base b = (Base) c.newInstance();
+        b.process();
+    }
+}
+```
+
+
+## 运行时类的重载
+
+如果 JVM 已经先加载了一个类， 然后对其字节码进行修改会发生什么呢？
+
+![报错](/assets/images/runtime_load_class_exception.jpg)
+
+
+### Instrument
+> Instrument 就是 JVM 提供的可以修改已加载的类的类库
+
+实验: 在一个持续运行并且已经加载了所有类的 JVM 中， 如何利用字节码增强技术对类的行为作替换并重新加载。
+
+
+JPDA（Java Platform Debugger Architecture）
+JVM  启动时开启 JPDA 那么类是被允许重新加载的。
+
+JPDA 定义了一套完整的体系，将「调试」分为 3 部分， 并规定了 3 者之间的通信接口， 3 部分由高到低分别为：
+- Java 虚拟机工具接口（ JVMTI ( JVM tool interface ) ）  
+
+     JVMTI 是 JVM 提供的一套对 JVM 进行操作的工具接口， 通过 JVMTI 可以实现对 JVM 的多种操作， 它通过注册各种事件勾子， 在 JVM 触发时同时触发预定义的勾子， 以实现对各个 JVM 事件的响应，事件包括：
+      
+      - 类文件加载；
+      - 异常产生与捕获；
+      - 线程启动与结束；
+      - 进入和退出临界区；
+      - 成员变量修改；
+      - GC 开始和结束；
+      - 方法调用进入和退出；
+      - 临界区竞争与等待；
+      - VM 启动与退出
+  
+     Agent 就是 JVMTI 的一种实现，Agent 有 2 种启动方式： 
+      
+      1. 随着 java 进程启动而启动（ Java -agentlib ）；
+      2. 运行时载入， 通过 attach API， 将 jar 动态地 Attach 到 指定进程 id 的 Java 进程内
+      
+      Attach API 作用是提供 JVM 之间的通信能力， 比如为了让另外一个 JVM 进程把线程服务的线程 Dump 出来， 会运行 jstack 或 jmap 的进程， 传递 pid 参数， Attach API 也能实现
+      
+- Java 调试协议（JDWP）
+- Java 调试接口（JDI）
+
+依赖 JVMTI 的 Attach API 机制实现
+
+ClassFileTransformer 接口
+
+
+
+  
+
+
+
+
+
+
+
+
+
+原文参考：https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html

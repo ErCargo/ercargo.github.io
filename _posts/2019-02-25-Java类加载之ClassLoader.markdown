@@ -1,33 +1,21 @@
 ---
 layout: post
-title: Java 虚拟机学习笔记
+title: Java 类加载之 ClassLoader
 date: 2019-03-31 23:13
 ---
 
-- Java 虚拟机
+- JVM 的组成部分
 - 什么是 ClassLoader 
 
 
-------------------------------------------------------------------------------------------------
-## Java 虚拟机
-> 虚拟机是一种抽象化的计算机, 通过在实际的计算机上仿真模拟各种计算机功能来实现；
-> Java 虚拟机 有自己完善的硬件架构，如: 处理器、堆栈、寄存器，还有相应的指令系统；
-> Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Java 程序只需要生成在 Java 虚拟机上运行的目标代码（即字节码）就可以在多种平台上不加修改的运行
-
-    Java 程序之所以可以「一次编译，到处运行」 原因是: 
-    - Java 虚拟机对各种不同的操作系统/平台进行了定制；
-    - 无论在什么平台都可以编译生成固定的字节码（.class 文件）供 JVM 使用
-
-JVM 是一个内存中的虚拟机，JVM 的存储就是内存，所有 类、常量、变量、方法都在内存中。
-
-JVM 的组成部分：
-
-![Java 虚拟机](/assets/images/javavm.jpg)
+## JVM 组成部分
 
 1. Class Loader: 作用: 加载编译后的 class 文件到内存
 2. RunTime Data Area: JVM 内存模型
 3. Execution Engine: 解析 class 文件中的字节码， 解析后提交到操作系统中执行
 4. Native Interface: 本地接口，融合不同的编程语言的原生库为 Java 所用
+
+![Java 虚拟机](/assets/images/javavm.jpg)
 
 Q: JVM 如何加载 .class 文件
 
@@ -189,4 +177,117 @@ Q: JVM 如何加载 .class 文件
      引申思考「字节码增强技术」[Java字节码学习笔记](/2020/04/Java字节码学习笔记)
 
  
+## ClassLoader 的双亲委派机制（parent）
+> 不同的 ClassLoader 加载类的方式和路径是不同的，为了实现分工， 各自负责各自的区块， 使得逻辑更明确
+
+    为什么叫双亲委派模型？
+    
+    该模型中除了 最顶层的 BootstrapClassLoader, 其余的 ClassLoader 都有自己的 父类 ClassLoader 但这个父子关系是由 「组合」 而不是继承来实现的
+
+1. 自底而上的检查类是否已被加载
+  - 从自定义 ClassLoader 开始查看是否某个类被加载过，
+  - 没有就去 AppClassLoader 去查找，
+  - 没有再继续到 ExtClassLoader 查找， 
+  - 直到 BootStrapClassLoader
+  - 如果还是没有就会继续按照下面「自顶向下」 的方式查找
+2. 自顶向下的尝试加载类
+  - 委派给 BootstrapLoader Load JRE\lib\rt.jar  或 Xbootclasspath 选项指定的 jar 包
+  - 如果没有就委派给 ExtClassLoader Load JRE\lib\ext\*.jar  或 -Djava.ext.dirs 指定目录下的 jar 包
+  - 如果没有就委派给 AppClassLoader Load CLASSPATH 或 -Djava.class.path 指定目录下的类和 jar 包
+  - 如果没有就通过 java.lang.ClassLoader 的子类自定义加载 class
+ 
+
+为什么要用双亲委派机制去加载类？
+为了避免多份同样的字节码被加载；
+
+
+JDK 中也有较大规模的破坏双亲模型的情况，如： 线程上下文类加载器（Thread Context ClassLoader）
+
+
+## 类的加载方式
+- 隐式加载 new: 程序在运行过程中遇到 new 生成对象，会隐式调用「类加载器」加载对应的类到 jvm 中； new xxx(yyy) 支持传参数
+- 显示加载 loadClass(), Class.forName()
+  显示加载， 当获取 class 对象后， 需要调用 class 对象的 newInstance() 方法来生成对象的实例   xxx.newInstance() 不支持参数传入
+
+### loadClass 和 Class.forName() 的区别
+
+相同点：在运行过程中对于任意一个类都能直到该类的属性和方法， 对于任意一个对象，都能调用它的任意方法和属性
+
+
+类的装载过程：
+- 加载: ClassLoader 加载 Class 文件字节码到内存中， 并将「静态数据」转化成「运行时数据区」中**方法区**的类型数据，在运行时数据区的堆中， 生成一个代表这个类的 java.lang.class 对象 作为方法区内的数据访问入口；
+- 链接: （resolve: true）
+  
+    - 校验: 检查加载 class 文件的正确性和安全性;
+    - 准备: 为类变量分配存储空间、设置类变量初始值；类变量（static 变量）随类型信息存放在方法区中，生命周期很长，使用不当很容易造成内存泄漏
+    - 解析: JVM 将常量池内的符号引用转换为直接引用
+    
+- 初始化: 执行类变量赋值和静态代码块
+
+
+参照上述的类装载过程，分析源码得出: 
+
+Class.forName 得到的 class 是已经初始化完成的
+initialize: true
+
+![Java forName](/assets/images/forName.jpg)
+
+ClassLoader.loadClass 得到的 class 是还没有 链接的，只是进行了加载
+resolve: false
+
+![Java loadClass](/assets/images/loadClass.jpg)
+
+实验:
+
+```java
+public class Base {
+    public static void process() {
+        System.out.println("process");
+    }
+
+    static {
+        System.out.println("静态代码块被执行（类变量准备）");
+    }
+}
+
+```
+
+```java
+public class ClassLoaderTest {
+    public static void main(String[] args) {
+        ClassLoader c = Base.class.getClassLoader();
+    }
+}
+```
+执行结果：
+静态代码块未被加载，表示类变量未被初始化（未链接）
+
+![Java static](/assets/images/static.jpg)
+
+
+```java
+public class ClassLoaderTest {
+    public static void main(String[] args) throws ClassNotFoundException {
+//        ClassLoader c = Base.class.getClassLoader();
+        Class c = Class.forName("com.ercargo.asmbase.Base");
+    }
+}
+```
+执行结果：
+
+说明 Class.forName() 会初始化类
+![Java forname class](/assets/images/forname_class.jpg)
+
+
+e.g: Mysql Driver(com.mysql.jdbc.Driver) 需要用 forName 才能执行到 Driver 类中的静态代码块
+
+> Spring Ioc 资源加载器获取要读入的资源时（读取写 Bean 的配置文件时 ），如果时以 Classpath 的方式加载， 就需要使用 ClassLoader.loadClass() 来加载， 
+这和 Spring Ioc 的 lazy loading 相关（延迟加载）， Spring Ioc 为了加快初始化速度，大量使用了延时加载技术， ClassLoader 就是不需要执行「初始化」代码等步骤（只需要将 class 字节码加载进内存）
+这样可以加快类的加载速度， 等到真正使用这个类的时候，才进行类的初始化， 链接等工作。
+
+
+
+
+
+--------------
 

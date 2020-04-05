@@ -198,18 +198,6 @@
 
 <blockquote>
   <p>JVM 要求字节码文件必须由一下 10 个部分按照顺序组成：</p>
-  <ul>
-    <li>魔数</li>
-    <li>版本号</li>
-    <li>常量池</li>
-    <li>访问标志</li>
-    <li>当前类索引</li>
-    <li>父类索引</li>
-    <li>接口索引</li>
-    <li>字段表</li>
-    <li>方法表</li>
-    <li>附加属性</li>
-  </ul>
 </blockquote>
 
 <h4 id="魔数magic">魔数（Magic）</h4>
@@ -226,7 +214,7 @@
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>常量池中存储 2 类常量： 字面量&amp;符号引用。
 字面量： 代码中声明为 final 的常量值；
 符号引用： 类/接口的全局限定名、字段名称和描述符、方法名称和描述符
-常量池整体分为 2 个部分： 常量池计数器 和 常量池数据区
+常量池整体分为 2 个部分： 描述常量池计数器 和 常量池数据区
 
 - 常量池计数器： 常量的数量是不固定的， 所以先放置 2 个字节来表示常量池的容量计数值
 - 常量池数据区： N 个字节来描述代码中的常量， 可以通过javap -verbose xxx 来查看 JVM 反编译后的完整常量池。
@@ -245,14 +233,52 @@
 </code></pre></div></div>
 
 <h4 id="接口索引interfaces">接口索引（interfaces）</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 个字节的接口计数器， 描述了该类/父类实现的接口数量，N 个字节描述所有接口名称的字符串常量的索引值
+</code></pre></div></div>
 
 <h4 id="字段表fields">字段表（fields）</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>描述类和接口中声明的变量，但不包含方法内部声明的局部变量
+字段表分为 2 个部分：描述字段个数和字段详细信息
+</code></pre></div></div>
 
 <h4 id="方法表methods">方法表（methods）</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>方法表分为 2 部分组成，描述方法的个数 和 每个方法的详细信息
+</code></pre></div></div>
 
 <h4 id="附加属性attributes">附加属性（attributes）</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>类或接口所定义属性的基本信息
+</code></pre></div></div>
 
-<p>什么是「字节码增强技术」 就是对现有字节码进行修改/动态生成全新字节码文件的技术。</p>
+<h3 id="操作数栈和字节码">操作数栈和字节码</h3>
+<p>JVM 指令集基于栈进行操作而不是在寄存器中操作，
+原因是：基于栈可以有很好的跨平台性（因为寄存器指令集往往和硬件挂钩）
+但是缺点是：</p>
+<ol>
+  <li>要完成同样的操作，基于栈的实现需要更多指令才能完成（因为栈是一个 FIFO 结构， 需要频繁的压栈出栈）</li>
+  <li>栈的速度慢很多因为：
+    <ul>
+      <li>栈是在内存实现</li>
+      <li>寄存器是在 CPU 的高速缓存区</li>
+    </ul>
+  </li>
+</ol>
+
+<p>但是为了跨平台只好作出牺牲</p>
+
+<p>操作码，操作集合 控制的都是 JVM 的操作数栈</p>
+
+<h2 id="什么是字节码增强">什么是「字节码增强」</h2>
+<blockquote>
+  <p>就是对「现有字节码」进行修改/动态生成「全新字节码」文件的技术。</p>
+</blockquote>
+
+<p>「字节码增强技术」应用场景:</p>
+<ul>
+  <li>Spring AOP</li>
+  <li>ORM 框架</li>
+  <li>热部署</li>
+  <li>…</li>
+</ul>
 
 <p><img src="/assets/images/bytecode.jpg" alt="字节码增强技术(摘自其他网站)" /></p>
 
@@ -266,30 +292,236 @@
 
 <hr />
 
-<p>「字节码增强技术」应用场景:</p>
+<h3 id="asm">ASM:</h3>
+
+<blockquote>
+  <p>ASM 手动操纵字节码。可以直接生产 .class 文件，也可以在类被加载入 JVM 前动态修改</p>
+</blockquote>
+
+<p>ASM 的应用场景：AOP（Cglib 就是基于 ASM）、热部署、修改其他 jar 包中的类等。</p>
+
+<p>ASM 的 2 种 API(ASM 的处理流程【访问者模式】，主要用于修改或操作一些数据结构比较稳定的数据)</p>
+
+<h4 id="asm-api">ASM API</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ASM Core API 可以类比解析 XML 文件中的 SAX 方式， 不需要把这个类的整个结构读取出来， 用流式的方法来处理字节码文件
+好处：节约内存，性能强大
+缺点：编程难度大
+</code></pre></div></div>
+
+<p>ASM Core API 中几个关键的类：</p>
+
 <ul>
-  <li>Spring AOP</li>
-  <li>ORM 框架</li>
-  <li>热部署</li>
+  <li>ClassReader:</li>
+  <li>ClassWriter:</li>
+  <li>各种 Visitor: MethodVisitor(访问方法), FieldVisitor（访问类变量）, AnnotationVisitor（访问注解）</li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ASM Tree API 类比解析 XML 文件的 DOM 方式， 把整个类的结构读取到内存中， 编程较简单，
+TreeAPI 通过各种 Node 类来映射字节码各个区域， 类比 DOM 节点。
+</code></pre></div></div>
+
+<h5 id="利用-asm-core-api实现-aop">利用 ASM （Core API）实现 AOP</h5>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Base</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">process</span><span class="o">(){</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"process"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Generator</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="c1">//TODO 这一步在读取 类的时候有问题， 暂时还没找到原因，不知道为啥</span>
+        <span class="n">ClassReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassReader</span><span class="o">(</span><span class="s">"/Users/ercargo/ErCargo/concurrency/src/main/java/com/ercargo/asmbase/Base"</span><span class="o">);</span>
+        <span class="n">ClassWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ClassWriter</span><span class="o">(</span><span class="n">ClassWriter</span><span class="o">.</span><span class="na">COMPUTE_MAXS</span><span class="o">);</span>
+
+        <span class="n">ClassVisitor</span> <span class="n">visitor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyClassVisitor</span><span class="o">(</span><span class="n">writer</span><span class="o">);</span>
+        <span class="n">reader</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">visitor</span><span class="o">,</span> <span class="n">ClassReader</span><span class="o">.</span><span class="na">SKIP_DEBUG</span><span class="o">);</span>
+
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">data</span> <span class="o">=</span> <span class="n">writer</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">();</span>
+
+        <span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">"/Users/ercargo/ErCargo/concurrency/src/main/java/com/ercargo/asmbase/Base.class"</span><span class="o">);</span>
+
+        <span class="n">FileOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="n">file</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+        <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"generate success"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyClassVisitor</span> <span class="kd">extends</span> <span class="n">ClassVisitor</span> <span class="kd">implements</span> <span class="n">Opcodes</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">MyClassVisitor</span><span class="o">(</span><span class="n">ClassVisitor</span> <span class="n">classVisitor</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">ASM5</span><span class="o">,</span> <span class="n">classVisitor</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">visit</span><span class="o">(</span><span class="kt">int</span> <span class="n">version</span><span class="o">,</span> <span class="kt">int</span> <span class="n">access</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span> <span class="n">superName</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">interfaces</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">cv</span><span class="o">.</span><span class="na">visit</span><span class="o">(</span><span class="n">version</span><span class="o">,</span> <span class="n">access</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">signature</span><span class="o">,</span> <span class="n">superName</span><span class="o">,</span> <span class="n">interfaces</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 判断当前字节码读到什么地方， 跳过 init 方法， 将需要被增强的类交给内部类 MyMethodVisitor 来处理</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">MethodVisitor</span> <span class="nf">visitMethod</span><span class="o">(</span><span class="kt">int</span> <span class="n">access</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">desc</span><span class="o">,</span> <span class="n">String</span> <span class="n">signature</span><span class="o">,</span> <span class="n">String</span><span class="o">[]</span> <span class="n">exceptions</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">MethodVisitor</span> <span class="n">mv</span> <span class="o">=</span> <span class="n">visitMethod</span><span class="o">(</span><span class="n">access</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">desc</span><span class="o">,</span> <span class="n">signature</span><span class="o">,</span> <span class="n">exceptions</span><span class="o">);</span>
+        <span class="c1">// 不对构造方法进行字节码增强（Base Class 中包含 2 个方法， 一个是自定义的 process 方法， 一个是构造方法）</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">"&lt;init&gt;"</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">mv</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">mv</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyMethodVisitor</span><span class="o">(</span><span class="n">mv</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">mv</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 重写 MyMethodVisitor 中的两个方法，就可以实现 AOP
+     */</span>
+    <span class="kd">class</span> <span class="nc">MyMethodVisitor</span> <span class="kd">extends</span> <span class="n">MethodVisitor</span> <span class="kd">implements</span> <span class="n">Opcodes</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">MyMethodVisitor</span><span class="o">(</span><span class="n">MethodVisitor</span> <span class="n">mv</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">(</span><span class="n">Opcodes</span><span class="o">.</span><span class="na">ASM5</span><span class="o">,</span> <span class="n">mv</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">// 内部类，visitorCode() 方法， 会在 ASM 开始访问某一个方法的 code 区时被调用，重写 visitCode() 方法， 将 AOP 的前置逻辑放在这里</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">visitCode</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">.</span><span class="na">visitCode</span><span class="o">();</span>
+            <span class="n">mv</span><span class="o">.</span><span class="na">visitFieldInsn</span><span class="o">(</span><span class="n">GETSTATIC</span><span class="o">,</span> <span class="s">"java/lang/System"</span><span class="o">,</span> <span class="s">"out"</span><span class="o">,</span> <span class="s">"Ljava/io/PrintStream"</span><span class="o">);</span>
+            <span class="n">mv</span><span class="o">.</span><span class="na">visitLdcInsn</span><span class="o">(</span><span class="s">"start"</span><span class="o">);</span>
+            <span class="n">mv</span><span class="o">.</span><span class="na">visitMethodInsn</span><span class="o">(</span><span class="n">INVOKEVIRTUAL</span><span class="o">,</span> <span class="s">"java/io/PrintStream"</span><span class="o">,</span> <span class="s">"println"</span><span class="o">,</span> <span class="s">"(Ljava/lang/String;)V"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+
+        <span class="o">}</span>
+
+        <span class="cm">/**
+         * 继续读取 字节码指令， 每当 ASM 访问到「无参数指令」时， 都会调用 MyMethodVisitor 中的 visitInsn() 方法；
+         * 判断当前指令是否为无参数的 return 指令， 如果是，就在前面添加一些指令，就是将 AOP 的后置逻辑放在该方法中
+         * 通过调用 methodVisitor 的 visitXXXInsn() 方法就可以实现字节码的插入（XXX 对应是 操作码助记符）
+         * @param opcode
+         */</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">visitInsn</span><span class="o">(</span><span class="kt">int</span> <span class="n">opcode</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">((</span><span class="n">opcode</span> <span class="o">&gt;=</span> <span class="n">Opcodes</span><span class="o">.</span><span class="na">IRETURN</span> <span class="o">&amp;&amp;</span> <span class="n">opcode</span> <span class="o">&lt;=</span> <span class="n">Opcodes</span><span class="o">.</span><span class="na">RETURN</span><span class="o">)</span> <span class="o">||</span> <span class="n">opcode</span> <span class="o">==</span> <span class="n">Opcodes</span><span class="o">.</span><span class="na">ATHROW</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">mv</span><span class="o">.</span><span class="na">visitFieldInsn</span><span class="o">(</span><span class="n">GETSTATIC</span><span class="o">,</span> <span class="s">"java/lang/System"</span><span class="o">,</span> <span class="s">"out"</span><span class="o">,</span> <span class="s">"Ljava/io/PrintStream"</span><span class="o">);</span>
+                <span class="n">mv</span><span class="o">.</span><span class="na">visitLdcInsn</span><span class="o">(</span><span class="s">"end"</span><span class="o">);</span>
+                <span class="n">mv</span><span class="o">.</span><span class="na">visitMethodInsn</span><span class="o">(</span><span class="n">INVOKEVIRTUAL</span><span class="o">,</span> <span class="s">"java/io/PrintStream"</span><span class="o">,</span> <span class="s">"println"</span><span class="o">,</span> <span class="s">"(Ljava/lang/String;)V"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="n">mv</span><span class="o">.</span><span class="na">visitInsn</span><span class="o">(</span><span class="n">opcode</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h3 id="javassist">Javassist</h3>
+
+<blockquote>
+  <p>ASM 是在指令层次上操作字节码，而 Javassist 是在源代码层次操作字节码的</p>
+</blockquote>
+
+<p>最重要的几个类：ClassPool  CtClass  CtMethod  CtField</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * @author ercargo  on 2019/4/5
+ * @DESCRIBE
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavassistTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">NotFoundException</span><span class="o">,</span> <span class="n">CannotCompileException</span><span class="o">,</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">IllegalAccessException</span><span class="o">,</span> <span class="n">InstantiationException</span> <span class="o">{</span>
+        <span class="n">ClassPool</span> <span class="n">cp</span> <span class="o">=</span> <span class="n">ClassPool</span><span class="o">.</span><span class="na">getDefault</span><span class="o">();</span>
+        <span class="c1">// 用类的全限定名</span>
+        <span class="n">CtClass</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"com.ercargo.asmbase.Base"</span><span class="o">);</span>
+        <span class="n">CtMethod</span> <span class="n">cm</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">"process"</span><span class="o">);</span>
+
+        <span class="n">cm</span><span class="o">.</span><span class="na">insertBefore</span><span class="o">(</span><span class="s">"{System.out.println(\"start\");}"</span><span class="o">);</span>
+        <span class="n">cm</span><span class="o">.</span><span class="na">insertAfter</span><span class="o">(</span><span class="s">"{System.out.println(\"end\");}"</span><span class="o">);</span>
+
+        <span class="n">Class</span> <span class="n">c</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="na">toClass</span><span class="o">();</span>
+
+        <span class="n">cc</span><span class="o">.</span><span class="na">writeFile</span><span class="o">(</span><span class="s">"/Users/ercargo/Desktop"</span><span class="o">);</span>
+        <span class="n">Base</span> <span class="n">b</span> <span class="o">=</span> <span class="o">(</span><span class="n">Base</span><span class="o">)</span> <span class="n">c</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+        <span class="n">b</span><span class="o">.</span><span class="na">process</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="运行时类的重载">运行时类的重载</h2>
+
+<p>如果 JVM 已经先加载了一个类， 然后对其字节码进行修改会发生什么呢？</p>
+
+<p><img src="/assets/images/runtime_load_class_exception.jpg" alt="报错" /></p>
+
+<h3 id="instrument">Instrument</h3>
+<blockquote>
+  <p>Instrument 就是 JVM 提供的可以修改已加载的类的类库</p>
+</blockquote>
+
+<p>实验: 在一个持续运行并且已经加载了所有类的 JVM 中， 如何利用字节码增强技术对类的行为作替换并重新加载。</p>
+
+<p>JPDA（Java Platform Debugger Architecture）
+JVM  启动时开启 JPDA 那么类是被允许重新加载的。</p>
+
+<p>JPDA 定义了一套完整的体系，将「调试」分为 3 部分， 并规定了 3 者之间的通信接口， 3 部分由高到低分别为：</p>
+<ul>
+  <li>
+    <p>Java 虚拟机工具接口（ JVMTI ( JVM tool interface ) ）</p>
+
+    <p>JVMTI 是 JVM 提供的一套对 JVM 进行操作的工具接口， 通过 JVMTI 可以实现对 JVM 的多种操作， 它通过注册各种事件勾子， 在 JVM 触发时同时触发预定义的勾子， 以实现对各个 JVM 事件的响应，事件包括：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 类文件加载；
+- 异常产生与捕获；
+- 线程启动与结束；
+- 进入和退出临界区；
+- 成员变量修改；
+- GC 开始和结束；
+- 方法调用进入和退出；
+- 临界区竞争与等待；
+- VM 启动与退出
+</code></pre></div>    </div>
+
+    <p>Agent 就是 JVMTI 的一种实现，Agent 有 2 种启动方式：</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 随着 java 进程启动而启动（ Java -agentlib ）；
+2. 运行时载入， 通过 attach API， 将 jar 动态地 Attach 到 指定进程 id 的 Java 进程内
+  
+Attach API 作用是提供 JVM 之间的通信能力， 比如为了让另外一个 JVM 进程把线程服务的线程 Dump 出来， 会运行 jstack 或 jmap 的进程， 传递 pid 参数， Attach API 也能实现
+</code></pre></div>    </div>
+  </li>
+  <li>Java 调试协议（JDWP）</li>
+  <li>Java 调试接口（JDI）</li>
+</ul>
+
+<p>依赖 JVMTI 的 Attach API 机制实现</p>
+
+<p>ClassFileTransformer 接口</p>
+
+<p>原文参考：https://tech.meituan.com/2019/09/05/java-bytecode-enhancement.html</p>
 
   </section>
 </article>
 
 <section class="read-more">
     
+    
+    <div class="read-more-item">
+        <span class="read-more-item-dim">最近的文章</span>
+        <h2 class="post-list__post-title post-title"><a href="/2020/03/Redis/" title="link to Redis">Redis</a></h2>
+        <p class="excerpt">&hellip;</p>
+        <div class="post-list__meta">
+            <time datetime="2020-03-31 00:00:00 +0800" class="post-list__meta--date date">
+                2020-03-31
+            </time> &#8226; <span class="post-list__meta--tags tags"></span><a
+                class="btn-border-small" href=/2020/03/Redis/>继续阅读</a></div>
+    </div>
+    
 
     
     
     <div class="read-more-item">
         <span class="read-more-item-dim">更早的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" title="link to Java 反射实践">Java 反射实践</a></h2>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/" title="link to Java 类加载之反射机制">Java 类加载之反射机制</a></h2>
         <p class="excerpt">Java 反射机制能够动态获取信息、动态调用对象方法，即：在运行过程中：  对任意一个「类」都能知道它的属性和方法；  对任意一个「对象」，都能调用它的任意方法和属性；e.g:public class RobotTest {    private String name;    public void sayHi(String helloSentence){        System.out.println(helloSentence + "" + name);    }    priv...&hellip;</p>
         <div class="post-list__meta">
             <time datetime="2019-03-31 23:13:00 +0800" class="post-list__meta--date date">
                 2019-03-31
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/>继续阅读</a></div>
+                class="btn-border-small" href=/2019/03/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/>继续阅读</a></div>
     </div>
     
 </section>
@@ -305,7 +537,7 @@
         <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-04 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-05 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
     </footer>
 </section>
