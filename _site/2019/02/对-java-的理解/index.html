@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>如何理解 java</title>
+  <meta name="description" content="  java 的平台无关性  面向对象  Java 的语言特性  java 类库  GC">
+  <meta name="author" content="Wei Wang">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="如何理解 java">
+  <meta name="twitter:description" content="  java 的平台无关性  面向对象  Java 的语言特性  java 类库  GC">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="如何理解 java">
+  <meta property="og:description" content="  java 的平台无关性  面向对象  Java 的语言特性  java 类库  GC">
+  
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2019/02/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/">
+  <link rel="alternate" type="application/rss+xml" title="ErCargo's Coffee Time" href="http://localhost:4000/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>
+
+<body>
+<span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+<header class="panel-cover panel-cover--collapsed" style="background-image: url('/assets/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/#blog" title="前往 ErCargo's Coffee Time 的主页" class="blog-button"><img src="/assets/images/avatar.jpg" width="80" alt="ErCargo's Coffee Time logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for ErCargo's Coffee Time" class="blog-button">ErCargo's Coffee Time</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">以大多数人的努力程度之低，根本轮不到拼天赋</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        <p class="panel-cover__description"><a href="https://github.com/ErCargo/ercargo.github.io" target="_blank">Welcome to star and fork my github</a></p>
+        
+        
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="访问主页" class="blog-button">主页</a></li>
+                
+                  <li class="navigation__item"><a href="https://ercargo.github.io/#blog" target="_blank" title="分类">分类</a></li>
+                
+                  <li class="navigation__item"><a href="https://ercargo.github.io/#blog" target="_blank" title="标签">标签</a></li>
+                
+              </ul>
+            </nav>
+          </div>
+          
+          <div><nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  
+  <!-- Weibo -->
+  <li class="navigation__item">
+    <a href="http://weibo.com/ErCargo" title="@ErCargo 的微博" target="_blank">
+      <i class='social fa fa-weibo'></i>
+      <span class="label">Weibo</span>
+    </a>
+  </li>
+  
+
+  
+  <!-- Github -->
+  <li class="navigation__item">
+    <a href="https://github.com/ErCargo" title="@ErCargo 的 Github" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+  
+  
+  
+
+  
+
+  <!-- RSS -->
+  <li class="navigation__item">
+    <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+  
+  <!-- Email -->
+  <li class="navigation__item">
+    <a href="mailto:liners_ky@163.com" title="Contact me">
+      <i class='social fa fa-envelope'></i>
+      <span class="label">Email</span>
+    </a>
+  </li>
+  
+
+
+    
+    <!-- Github -->
+    <li class="navigation__item">
+      <a href="https://www.zhihu.com/people/li-er-97-87" target="_blank">
+        <i class="social fa fa-inverse">知</i>
+        <span class="label">知乎</span>
+      </a>
+    </li>
+    
+
+    
+    <!-- Github -->
+    <li class="navigation__item">
+      <a href="https://www.jiasnhu.com/u/55abc78f923e" target="_blank">
+        <i class="social fa fa-inverse">简</i>
+        <span class="label">简书</span>
+      </a>
+    </li>
+    
+
+  </ul>
+</nav>
+</div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-orange"></div>
+    
+  </div>
+</header>
+
+
+<div class="content-wrapper">
+    <div class="content-wrapper__inner">
+        <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2019-02-19 13:45:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-02-19</time> &#8226; <span class="post-meta__tags tags"></span>
+    </div>
+    <h1 class="post-title">如何理解 java</h1>
+  </header>
+
+  <section class="post">
+    <ul>
+  <li>java 的平台无关性</li>
+  <li>面向对象</li>
+  <li>Java 的语言特性</li>
+  <li>java 类库</li>
+  <li>GC</li>
+</ul>
+
+<hr />
+
+<p>对于 Java 的理解，每个程序员都会有不同的见解，而且能够说出很多不同维度的理解，如果发散开来一篇文章是说不完的。
+所以，本文主要是从 Java 的几点特性出发，简单的聊聊对 Java 的理解， 会不断的补充进来</p>
+
+<h2 id="一java-的平台无关性">一、Java 的平台无关性</h2>
+<p>Java 平台无关性简单理解就是一次编译到处运行，即平台无关性。那么问题来了，java 是如何实现平台无关性的?<br />
+通常 Java 程序运行会分为编译期和运行时 <br /></p>
+<ul>
+  <li>编译期：通过 Javac 指令，编译是指编译 Java 的源码(<em>.java文件编写的)，将源码编译生成字节码(存入到对应的</em>.class文件)，</li>
+  <li>运行时：通过 Java 指令执行字节码文件；(将字节码翻译成对应平台的机器码)</li>
+</ul>
+
+<p>反编译：Javap 指令是jdk自带的反汇编器，可以查看Java编译器为我们生成的字节码;
+    Javap -c 对字节码代码进行反汇编，将从*.class到可执行程序的过程逆过来, 查看 javac 生成的 class 文件的内容，就是将二进制文件转成 class 文件的过程;</p>
+
+<p>实践：下面给出一段代码，然后简单介绍一下这段代码的执行过程：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class ByteCodeTest {
+    public static void main(String[] args) {
+        int i = 1;
+        int j = 5;
+        i++;
+        System.out.println(i);
+        System.out.println(j);
+    }
+}
+</code></pre></div></div>
+<p>javac 指令的执行方式：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  javac + 类所在的文件路径 + 类名.java
+</code></pre></div></div>
+<p>执行会在与 *.Java 文件相同路径下生成 *.class 文件</p>
+
+<p>生成的 class 文件:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">//</span>
+<span class="p">//</span> <span class="n">Source</span> <span class="n">code</span> <span class="n">recreated</span> <span class="k">from</span> <span class="n">a</span> <span class="p">.</span><span class="n">class</span> <span class="n">file</span> <span class="n">by</span> <span class="n">IntelliJ</span> <span class="n">IDEA</span>
+<span class="p">//</span> <span class="p">(</span><span class="n">powered</span> <span class="n">by</span> <span class="n">Fernflower</span> <span class="n">decompiler</span><span class="p">)</span>
+<span class="p">//</span>
+
+<span class="k">package</span> <span class="n">com</span><span class="p">.</span><span class="n">ercargo</span><span class="p">.</span><span class="n">learn</span><span class="p">.</span><span class="n">concurrency</span><span class="p">.</span><span class="n">javabasic</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="n">class</span> <span class="n">ByteCodeTest</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="n">ByteCodeTest</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="k">String</span><span class="p">[]</span> <span class="n">var0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">byte</span> <span class="n">var1</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+        <span class="n">byte</span> <span class="n">var2</span> <span class="p">=</span> <span class="m">5</span><span class="p">;</span>
+        <span class="n">int</span> <span class="n">var3</span> <span class="p">=</span> <span class="n">var1</span> <span class="p">+</span> <span class="m">1</span><span class="p">;</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">var3</span><span class="p">);</span>
+        <span class="nf">System</span><span class="p">.</span><span class="n">out</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">var2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>反编译的过程解析一下 class 文件：</p>
+
+<ul>
+  <li>javap 是 jdk 自带反汇编器， 可以查看 java 编译器为我们生成的字节码;</li>
+</ul>
+
+<p><img src="/assets/images/javap.jpg" alt="javap指令执行方式" /></p>
+
+<p>ps: 以上就是 java 虚拟机( HotSpot )所能理解的字节码</p>
+
+<p>上述过程中 .class 文件中的字节码是 java 跨平台的核心和基础，Java 虚拟机可以解析该文件，转换成特定平台的执行指令（Linux,Windows,MacOS）</p>
+
+<blockquote>
+  <p>总的来说：Java 提供了各种不同平台上的虚拟机，jvm 可以将字节码文件加载到内存，并最终转换成当前操作系统能够识别的机器码去执行，从而实现了平台无关性；</p>
+</blockquote>
+
+<h2 id="二面向对象">二、面向对象</h2>
+<p>Java 具有面向对象语言的基本特性，封装、继承、多态，这里简单给出一点自己的见解，详细理解可以参考：
+<a href="https://sophia.javeriana.edu.co/~cbustaca/docencia/POO-2016-01/documentos/Thinking_in_Java_4th_edition.pdf">《Thinking in java》</a></p>
+<blockquote>
+  <ul>
+    <li>封装: 封装是抽象具有相同特性和行为的对象集合，理解成对类的内部实现进行隐藏，对外界只暴露该类的访问方法</li>
+    <li>继承: 基类重用超类代码</li>
+    <li>多态: 后期绑定/动态绑定，OOP 中，程序直到运行时才能确定代码的地址，所以必须通过动态绑定，当像对象发送消息时，被调用的代码直到运行时才能确定。<br />
+涉及到泛型的概念</li>
+  </ul>
+</blockquote>
+
+<p>注意这里有一个问题，我们在真正写代码的时候会经常用继承吗？继承会导致一些什么问题？<br />
+<a href="https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/">《Effective Java》</a>中提出一个概念：组合优于继承</p>
+
+<p>为什么说组合优于继承呢？</p>
+<blockquote>
+  <p>继承：子类继承父类，即父类的内部细节(方法和属性)对子类都是可见的，如果父类发生改变，子类必然也要随之改变，所以会造成代码的耦合度非常高
+而且破坏代码的封装性，一般除了使用多态的情况(需要从新类向基类进行向上转型)，或者父类完全不会改变的情况（确认基类与超类之间存在的只有is-a的关系），
+都是不推荐使用继承的；
+组合是将现有对象进行拼装产生新的更复杂的功能，类的组合关系一般在运行期确定，如下面这段代码：
+```
+public class Teacher {
+    private double salary;
+    /**
+     * 将User和Teacher 组合，而不是Teacher继承User，
+     * User中的其他属性修改，不会直接影响Teacher
+     */
+    private User user;</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public double getSalary() {
+    return salary;
+}
+
+public void setSalary(double salary) {
+    this.salary = salary;
+}
+
+public String getName(){
+   return user.getName();
+} } ```
+</code></pre></div></div>
+
+<h2 id="三java-语言特性">三、Java 语言特性</h2>
+<p>关于 Java 的语言特性，主要包括：泛型，反射，java8 提供的 Lambda 表达式等
+本文简单介绍一下 java 的泛型和反射，后面深入学习之后再作总结。<br /></p>
+<ul>
+  <li>Java 泛型，简单的理解就是将原先具体的参数类型的定义泛化，编译器负责转成特定类型。多态实际上就是一种泛化机制。</li>
+  <li>Java 反射: 程序运行时，对任意一个类可以获取到类中的属性，方法； 对任意一个对象，可以调用他的方法。</li>
+  <li>Java8 Lambda 表达式，支持函数式编程</li>
+</ul>
+
+<h2 id="四java基础类库">四、Java基础类库</h2>
+<p>Java 的类库有很多很多，这里主要指的是JDK中包含的基础类库，源码下载：<a href="https://jdk.java.net/">jdk</a><br />
+比较重要的有：java 集合，java 并发库(J.U.C)， 网络库，IO，NIO 等等
+本文就不一一展开介绍，后续文章中会依次对这些重要的包进行总结。</p>
+
+<h2 id="五gc">五、GC</h2>
+<p>GC 是 Java 特性中的重点，也是面试经常被问到的问题。
+GC 简单来说就是 java 的垃圾回收，但是里面包含的内容非常多。谈到 GC, 必然要知道 JVM 的工作原理，内存结构。
+在<a href="/2019/03/聊聊GC">《聊聊 GC》</a>这一篇中将会进行详细介绍。</p>
+
+<hr />
+<p>文章内容主要是对自己学习的总结，还有很多需要深入挖掘的内容，To Be Continue<br /></p>
+
+<p>[参考引用]</p>
+<ol>
+  <li>《Thinking in Java》</li>
+  <li>《剑指Java面试》</li>
+  <li>《Effective Java》</li>
+</ol>
+
+  </section>
+</article>
+
+<section class="read-more">
+    
+    
+    <div class="read-more-item">
+        <span class="read-more-item-dim">最近的文章</span>
+        <h2 class="post-list__post-title post-title"><a href="/2019/02/Java%E5%AD%97%E8%8A%82%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="link to Java 字节码学习笔记">Java 字节码学习笔记</a></h2>
+        <p class="excerpt">  Java 字节码  Java 字节码结构  Java 字节码增强技术Java 字节码为什么叫 Java 字节码？  字节码文件由十六进制值组成， JVM 以 2 个十六进制值为 1组 进行读取, (2个16进制值表示一个字节）;  Java 可以一次编译，到处运行的原因：      JVM 针对各种操作系统、平台进行了定制；    无论在什么平台，都可以编译生成固定的字节码（.class 文件）供 JVM 使用  字节码很重要通过字节码可以直观的看到 Volatile 关键字如何在字节...&hellip;</p>
+        <div class="post-list__meta">
+            <time datetime="2019-02-21 16:39:00 +0800" class="post-list__meta--date date">
+                2019-02-21
+            </time> &#8226; <span class="post-list__meta--tags tags"></span><a
+                class="btn-border-small" href=/2019/02/Java%E5%AD%97%E8%8A%82%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>继续阅读</a></div>
+    </div>
+    
+
+    
+    
+    <div class="read-more-item">
+        <span class="read-more-item-dim">更早的文章</span>
+        <h2 class="post-list__post-title post-title"><a href="/2019/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%80%A0%E8%BD%AE%E5%AD%90/" title="link to 数据结构造轮子">数据结构造轮子</a></h2>
+        <p class="excerpt">数组（ArrayList）和链表(LinkedList)数组和链表是Java中最核心的两个数据结构，对任何其他数据结构的理解，基于这两者，所以本文参照jdk8提供的源码，自己对2者进行了理解后简单的实现，给出自己的代码实现，很多不足之处有待优化。1. 数组2. 链表&hellip;</p>
+        <div class="post-list__meta">
+            <time datetime="2019-02-18 13:45:00 +0800" class="post-list__meta--date date">
+                2019-02-18
+            </time> &#8226; <span class="post-list__meta--tags tags"></span><a
+                class="btn-border-small" href=/2019/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%80%A0%E8%BD%AE%E5%AD%90/>继续阅读</a></div>
+    </div>
+    
+</section>
+
+<section class="post-comments">
+  
+  
+  
+  
+</section>
+
+
+        <section class="footer">
+    <footer>
+    	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
+    </footer>
+</section>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+
+
+</body>
+
+</html>

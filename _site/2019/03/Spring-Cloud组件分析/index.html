@@ -5,17 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>Hello World - Vno</title>
-  <meta name="description" content="What’s this">
+  <title>Spring Cloud 组件分析</title>
+  <meta name="description" content="  Spring Cloud  ">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Hello World - Vno">
-  <meta name="twitter:description" content="What’s this">
+  <meta name="twitter:title" content="Spring Cloud 组件分析">
+  <meta name="twitter:description" content="  Spring Cloud  ">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Hello World - Vno">
-  <meta property="og:description" content="What’s this">
+  <meta property="og:title" content="Spring Cloud 组件分析">
+  <meta property="og:description" content="  Spring Cloud  ">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2016/02/hello-world-vno/">
+  <link rel="canonical" href="http://localhost:4000/2019/03/Spring-Cloud%E7%BB%84%E4%BB%B6%E5%88%86%E6%9E%90/">
   <link rel="alternate" type="application/rss+xml" title="ErCargo's Coffee Time" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -154,70 +154,102 @@
         <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2016-02-16 14:32:24 +0800" itemprop="datePublished" class="post-meta__date date">2016-02-16</time> &#8226; <span class="post-meta__tags tags"></span>
+      <time datetime="2019-03-20 23:10:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-03-20</time> &#8226; <span class="post-meta__tags tags"></span>
     </div>
-    <h1 class="post-title">Hello World - Vno</h1>
+    <h1 class="post-title">Spring Cloud 组件分析</h1>
   </header>
 
   <section class="post">
-    <h4 id="whats-this">What’s this</h4>
+    <ul>
+  <li>Spring Cloud</li>
+  <li></li>
+</ul>
 
-<p><a href="https://github.com/onevcat/vno-jekyll">Vno Jekyll</a> is a theme for <a href="http://jekyllrb.com">Jekyll</a>. It is a port of my Ghost theme <a href="https://github.com/onevcat/vno">vno</a>, which is originally developed from <a href="https://github.com/daleanthony/uno">Dale Anthony’s Uno</a>.</p>
+<h2 id="spring-cloud">Spring Cloud</h2>
 
-<h4 id="usage">Usage</h4>
+<blockquote>
+  <p>快速开发分布式应用的工具集</p>
+</blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/onevcat/vno-jekyll.git your_site
-<span class="nv">$ </span><span class="nb">cd </span>your_site
-<span class="nv">$ </span>bundler <span class="nb">install</span>
-<span class="nv">$ </span>bundler <span class="nb">exec </span>jekyll serve
-</code></pre></div></div>
-
-<p>Your site with <code class="highlighter-rouge">Vno Jekyll</code> enabled should be accessible in http://127.0.0.1:4000.</p>
-
-<p>For more information about Jekyll, please visit <a href="http://jekyllrb.com">Jekyll’s site</a>.</p>
-
-<h4 id="configuration">Configuration</h4>
-
-<p>All configuration could be done in <code class="highlighter-rouge">_config.yml</code>. Remember you need to restart to serve the page when after changing the config file. Everything in the config file should be self-explanatory.</p>
-
-<h4 id="background-image-and-avatar">Background image and avatar</h4>
-
-<p>You could replace the background and avatar image in <code class="highlighter-rouge">assets/images</code> folder to change them.</p>
-
-<h4 id="sites-using-vno">Sites using Vno</h4>
-
-<p><a href="http://onevcat.com">My blog</a> is using <code class="highlighter-rouge">Vno Jekyll</code> as well, you could see how it works in real. There are some other sites using the same theme. You can find them below:</p>
+<p>主要功能</p>
 
 <table>
   <thead>
     <tr>
-      <th>Site Name</th>
-      <th>URL</th>
+      <th>功能</th>
+      <th>工具</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>OneV’s Den</td>
-      <td><a href="http://onevcat.com">http://onevcat.com</a></td>
+      <td>分布式/版本化的配置管理</td>
+      <td>Spring Cloud Config、 Consul、Zookeeper、Nacos</td>
     </tr>
     <tr>
-      <td>July Tang</td>
-      <td><a href="http://onevcat.com">http://blog.julytang.xyz</a></td>
+      <td>服务注册与服务发现</td>
+      <td>Eureka、Consul、Zookeeper、Nacos</td>
     </tr>
     <tr>
-      <td>Harry Lee</td>
-      <td><a href="http://qiuqi.li">http://qiuqi.li</a></td>
+      <td>路由/网关</td>
+      <td>Zuul、Spring Cloud Gateway</td>
+    </tr>
+    <tr>
+      <td>端到端的服务调用</td>
+      <td>RestTemplate、Feign</td>
+    </tr>
+    <tr>
+      <td>负载均衡</td>
+      <td>Ribbon</td>
+    </tr>
+    <tr>
+      <td>断路器</td>
+      <td>Hystrix、Resilienc4J、 Sentinel</td>
+    </tr>
+    <tr>
+      <td>全局锁</td>
+      <td>SpringCloud Cluster (已迁移到 SpringIntegration)</td>
+    </tr>
+    <tr>
+      <td>选举与集群管理状态</td>
+      <td>SpringCloud Cluster (已迁移到 SpringIntegration)</td>
+    </tr>
+    <tr>
+      <td>分布式消息</td>
+      <td>Kafka、 RabbitMQ Spring Cloud Stream</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>If you happen to be using this theme, welcome to <a href="https://github.com/onevcat/vno-jekyll/pulls">send me a pull request</a> to add your site link here. :)</p>
-</blockquote>
+<h2 id="spring-cloud-版本与兼容性">Spring cloud 版本与兼容性</h2>
 
-<h4 id="license">License</h4>
+<p>Spring Cloud 版本命名: <code class="highlighter-rouge">https://spring.io/projects/spring-cloud#learn</code></p>
 
-<p>Great thanks to <a href="https://github.com/daleanthony">Dale Anthony</a> and his <a href="https://github.com/daleanthony/uno">Uno</a>. Vno Jekyll is based on Uno, and contains a lot of modification on page layout, animation, font and some more things I can not remember. Vno Jekyll is followed with Uno and be licensed as <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>. See the link for more information.</p>
+<p>版本顺序:</p>
+
+<p>Angel Brixton Camden  Dalston Edgware Finchley Greenwich Hoxton</p>
+
+<p>指定版本的发布流程：</p>
+
+<p>SNAPSHOT -&gt; Mx -&gt; RELEASE -&gt; SRx</p>
+
+<p>Spring Cloud 生命周期</p>
+
+<ul>
+  <li>
+    <p>版本发布规划: <code class="highlighter-rouge">https://github.com/spring-cloud/spring-cloud-release/milestones</code></p>
+  </li>
+  <li>
+    <p>版本发布记录: <code class="highlighter-rouge">https://github.com/spring-cloud/spring-cloud-release/releases</code></p>
+  </li>
+  <li>
+    <p>版本终止声明:  <code class="highlighter-rouge">https://spring.io/projects/spring-cloud#overview</code></p>
+  </li>
+</ul>
+
+<p>Spring cloud 和 Spring Boot 的版本兼容性: <code class="highlighter-rouge">https://spring.io/projects/spring-cloud</code></p>
+
+<p><img src="/assets/images/version.jpg" alt="version" /></p>
+
 
   </section>
 </article>
@@ -227,16 +259,28 @@
     
     <div class="read-more-item">
         <span class="read-more-item-dim">最近的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/02/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/" title="link to 排序算法简单实现">排序算法简单实现</a></h2>
-        <p class="excerpt">  关于排序算法的文章很多，本人因为算法相当菜，所以看了很多相关的博客、书籍、视频等等，但是还是一知半解（无奈人笨没办法），那就自己先写一写吧，按照：先看懂原理，然后分析算法步骤，然后自己idea中实践，然后手写理解的方法，慢慢啃吧。&hellip;</p>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/Redis-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/" title="link to Redis 知识点梳理">Redis 知识点梳理</a></h2>
+        <p class="excerpt">&hellip;</p>
         <div class="post-list__meta">
-            <time datetime="2019-02-17 16:45:00 +0800" class="post-list__meta--date date">
-                2019-02-17
+            <time datetime="2019-03-22 13:45:00 +0800" class="post-list__meta--date date">
+                2019-03-22
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/02/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/>继续阅读</a></div>
+                class="btn-border-small" href=/2019/03/Redis-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/>继续阅读</a></div>
     </div>
     
 
+    
+    
+    <div class="read-more-item">
+        <span class="read-more-item-dim">更早的文章</span>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/" title="link to 多线程之 ThreadLocal">多线程之 ThreadLocal</a></h2>
+        <p class="excerpt">  Pre talk  ThreadLocal 是什么？解决了什么问题？  ThreadLocal 源码分析及实现原理  ThreadLocal 内存泄漏问题  InheritableThreadLocal 的实现原理Pre talk线程封闭技术访问共享可变数据时，通常需要使用同步，同步会产生性能问题，如何避免使用同步的方式来保证线程安全问题 – 不共享数据， 如何保证数据不共享呢？如果仅仅是在单线程内访问数据，就不会存在数据共享的问题，也就不需要数据同步。 (线程封闭: Thread C...&hellip;</p>
+        <div class="post-list__meta">
+            <time datetime="2019-03-06 16:39:00 +0800" class="post-list__meta--date date">
+                2019-03-06
+            </time> &#8226; <span class="post-list__meta--tags tags"></span><a
+                class="btn-border-small" href=/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/>继续阅读</a></div>
+    </div>
     
 </section>
 

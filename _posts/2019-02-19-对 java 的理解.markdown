@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何理解 java
-date: 2019-03-24 13:45
+date: 2019-02-19 13:45
 ---
 
 - java 的平台无关性

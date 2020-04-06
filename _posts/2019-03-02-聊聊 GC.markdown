@@ -1,0 +1,140 @@
+---
+layout: post
+title: 聊聊 GC
+date: 2019-03-02 13:45
+---
+
+-- Java 垃圾回收机制
+-- 常见的垃圾收集器
+-- Java 中的各种引用
+
+
+
+## Java 垃圾回收机制
+
+### 对象什么情况下被看作是垃圾？
+
+对象不被任何其他对象引用时，就可以被认为是垃圾对象，就可以被内存回收
+
+### 如何判断对象是否为垃圾？
+
+- 引用计数算法
+   - 判断对象的引用数量来决定是否可以被回收，引用计数器为 0 时就可以被回收;
+   - 但是不可避免循环引用的问题;
+
+- 可达性分析算法(主流的 JVM 使用的算法)
+   
+   - 判断对象的引用链是否可达， 来决定队形是否可被回收；
+   - 引用离散数学中的图论，GC Root；
+   - 可以被作为 GC root 的对象有： 
+     - 虚拟机栈中引用的对象
+     - 方法区中常量引用对象
+     - 方法区中类静态属性引用对象
+     - 本地方法栈中引用的对象
+     - 活跃线程的对象
+    
+### 垃圾回收算法
+
+-  标记 - 清除算法
+-  复制算法（对象面、空闲面），适用于对象存活率低的场景（年轻代）
+-  标记 - 整理算法， 适用于对象存活率较高的场景（老年代）
+-  分代回收算法
+
+**分代回收算法**
+
+![GC](/assets/images/GC.jpg)
+
+ `年轻代（Young Generation） Eden 区 、 2 个 Survivor 区`
+ 
+ `老年代（Old Generation`
+
+分代回收的 GC 分类
+- Minor GC 发生在年轻代中（复制算法）
+- Full GC  
+
+触发 Full GC 的条件
+- 老年大空间不足， 不够放下一个大对象；（不要创建太大的对象）
+- 永久代（jdk1.8-）为什么用元空间替代永久代， 也是为了降低 Full GC 的频率
+- CMS  GC 时 出现 promotion failed, concurrent mode filure
+- System.gc()
+- RMI RPC  /管理 JDK 应用， 每 1 小时执行一个 Full GC
+
+常用的调优参数
+|      参数          | 含义                                            |
+| -------------------- | ---------------------------------------------------|
+| -XX:SurvivorRatio    |  Eden 和 其中一个Survivor 的比值 默认 8:1             |
+| -XX:NewRatio         |  老年代和年轻代的比例（e.g: 如果值为 2 表示 2:1）          |
+| -Xms -Xms            | 新生代和老年代的总内存大小                                |
+| -XX:MaxTenuringThreshold       |   对象从年轻代晋升到老年代经过 GC 次数的最大阈值  |
+
+
+**stop-the-world**
+
+JVM 由于要执行 GC 而停止了应用程序的执行， 会在任何一种 GC 算法中发生， 当Stop-the-world 发生时，除了 GC 所使用的线程；
+经常说的 GC 优化就是通过减少 Stop-the-world 发生的时间来提高程序性能
+
+## 常见的垃圾收集器
+
+![gc_cat](/assets/images/gc_cat.jpg)
+
+CMS 收集器
+
+G1 收集器 Garbage First（复制 + 标记-整理算法）既用于年轻代， 又用于老年代
+- 并行和并发（多个 CPU 缩短 stop-the-world 的时间， 与用户线程并发执行）
+- 分代收集
+- 空间整合（标记-整理算法）
+- 可预测的停顿
+
+
+Epsillon GC 
+ZGC
+
+
+## Java 中的各种引用
+- 强引用（strong  reference）
+
+  Object obj = new Object()
+  
+  不会回收具有强引用的对象（OOM），只能通过将对象设置为 null 的方式来弱化引用， 使其被回收
+  
+- 软引用(soft reference)
+
+```java
+   String str = new String("aaa");
+   SoftReference<String> soft = new SoftReference<String>(str); // 软引用
+```
+
+  有用，但非必须， 当内存空间不足时， GC 会回收该引用的对象内存,， 但 GC 线程优先级较低
+  
+  可以用来实现高速缓存
+  
+- 弱引用（week reference）
+
+```java
+   String str = new String("aaa");
+   WeakReference<String> soft = new WeakReference<String>(str); // 软引用
+```
+
+  非必须的，类似软引用, 比软引用更弱
+  无论内存是否够用， GC 都会回收弱引用对象
+  
+- 虚引用（Phantom reference）
+
+```java
+  // 虚引用
+  String str = new String("aaa");
+  ReferenceQueue queue = new ReferenceQueue();
+  PhantomReference ref = new PhantomReference(str, queue);
+```
+  不会决定对象的生命周期
+  
+  任何时候都会被 GC 回收
+    
+  主要用来跟踪对象被 GC 回收的活动， 起哨兵的作用， 必须和 ReferenceQueue 联合使用
+  
+  
+ 
+
+
+------
+
