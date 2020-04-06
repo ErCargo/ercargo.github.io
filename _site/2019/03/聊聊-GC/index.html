@@ -5,17 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>聊聊JVM与GC</title>
-  <meta name="description" content="JVM – Java虚拟机GC – Java垃圾回收">
+  <title>聊聊 GC</title>
+  <meta name="description" content="– Java 垃圾回收机制– 常见的垃圾收集器– Java 中的各种引用">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="聊聊JVM与GC">
-  <meta name="twitter:description" content="JVM – Java虚拟机GC – Java垃圾回收">
+  <meta name="twitter:title" content="聊聊 GC">
+  <meta name="twitter:description" content="– Java 垃圾回收机制– 常见的垃圾收集器– Java 中的各种引用">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="聊聊JVM与GC">
-  <meta property="og:description" content="JVM – Java虚拟机GC – Java垃圾回收">
+  <meta property="og:title" content="聊聊 GC">
+  <meta property="og:description" content="– Java 垃圾回收机制– 常见的垃圾收集器– Java 中的各种引用">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -154,14 +154,162 @@
         <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="2019-03-24 13:45:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-03-24</time> &#8226; <span class="post-meta__tags tags"></span>
+      <time datetime="2019-03-01 13:45:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-03-01</time> &#8226; <span class="post-meta__tags tags"></span>
     </div>
-    <h1 class="post-title">聊聊JVM与GC</h1>
+    <h1 class="post-title">聊聊 GC</h1>
   </header>
 
   <section class="post">
-    <p>JVM – Java虚拟机
-GC – Java垃圾回收</p>
+    <p>– Java 垃圾回收机制
+– 常见的垃圾收集器
+– Java 中的各种引用</p>
+
+<h2 id="java-垃圾回收机制">Java 垃圾回收机制</h2>
+
+<h3 id="对象什么情况下被看作是垃圾">对象什么情况下被看作是垃圾？</h3>
+
+<p>对象不被任何其他对象引用时，就可以被认为是垃圾对象，就可以被内存回收</p>
+
+<h3 id="如何判断对象是否为垃圾">如何判断对象是否为垃圾？</h3>
+
+<ul>
+  <li>引用计数算法
+    <ul>
+      <li>判断对象的引用数量来决定是否可以被回收，引用计数器为 0 时就可以被回收;</li>
+      <li>但是不可避免循环引用的问题;</li>
+    </ul>
+  </li>
+  <li>
+    <p>可达性分析算法(主流的 JVM 使用的算法)</p>
+
+    <ul>
+      <li>判断对象的引用链是否可达， 来决定队形是否可被回收；</li>
+      <li>引用离散数学中的图论，GC Root；</li>
+      <li>可以被作为 GC root 的对象有：
+        <ul>
+          <li>虚拟机栈中引用的对象</li>
+          <li>方法区中常量引用对象</li>
+          <li>方法区中类静态属性引用对象</li>
+          <li>本地方法栈中引用的对象</li>
+          <li>活跃线程的对象</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="垃圾回收算法">垃圾回收算法</h3>
+
+<ul>
+  <li>标记 - 清除算法</li>
+  <li>复制算法（对象面、空闲面），适用于对象存活率低的场景（年轻代）</li>
+  <li>标记 - 整理算法， 适用于对象存活率较高的场景（老年代）</li>
+  <li>分代回收算法</li>
+</ul>
+
+<p><strong>分代回收算法</strong></p>
+
+<p><img src="/assets/images/GC.jpg" alt="GC" /></p>
+
+<p><code class="highlighter-rouge">年轻代（Young Generation） Eden 区 、 2 个 Survivor 区</code></p>
+
+<p><code class="highlighter-rouge">老年代（Old Generation</code></p>
+
+<p>分代回收的 GC 分类</p>
+<ul>
+  <li>Minor GC 发生在年轻代中（复制算法）</li>
+  <li>Full GC</li>
+</ul>
+
+<p>触发 Full GC 的条件</p>
+<ul>
+  <li>老年大空间不足， 不够放下一个大对象；（不要创建太大的对象）</li>
+  <li>永久代（jdk1.8-）为什么用元空间替代永久代， 也是为了降低 Full GC 的频率</li>
+  <li>CMS  GC 时 出现 promotion failed, concurrent mode filure</li>
+  <li>System.gc()</li>
+  <li>RMI RPC  /管理 JDK 应用， 每 1 小时执行一个 Full GC</li>
+</ul>
+
+<p>常用的调优参数
+|      参数          | 含义                                            |
+| ——————– | —————————————————|
+| -XX:SurvivorRatio    |  Eden 和 其中一个Survivor 的比值 默认 8:1             |
+| -XX:NewRatio         |  老年代和年轻代的比例（e.g: 如果值为 2 表示 2:1）          |
+| -Xms -Xms            | 新生代和老年代的总内存大小                                |
+| -XX:MaxTenuringThreshold       |   对象从年轻代晋升到老年代经过 GC 次数的最大阈值  |</p>
+
+<p><strong>stop-the-world</strong></p>
+
+<p>JVM 由于要执行 GC 而停止了应用程序的执行， 会在任何一种 GC 算法中发生， 当Stop-the-world 发生时，除了 GC 所使用的线程；
+经常说的 GC 优化就是通过减少 Stop-the-world 发生的时间来提高程序性能</p>
+
+<h2 id="常见的垃圾收集器">常见的垃圾收集器</h2>
+
+<p><img src="/assets/images/gc_cat.jpg" alt="gc_cat" /></p>
+
+<p>CMS 收集器</p>
+
+<p>G1 收集器 Garbage First（复制 + 标记-整理算法）既用于年轻代， 又用于老年代</p>
+<ul>
+  <li>并行和并发（多个 CPU 缩短 stop-the-world 的时间， 与用户线程并发执行）</li>
+  <li>分代收集</li>
+  <li>空间整合（标记-整理算法）</li>
+  <li>可预测的停顿</li>
+</ul>
+
+<p>Epsillon GC 
+ZGC</p>
+
+<h2 id="java-中的各种引用">Java 中的各种引用</h2>
+<ul>
+  <li>
+    <p>强引用（strong  reference）</p>
+
+    <p>Object obj = new Object()</p>
+
+    <p>不会回收具有强引用的对象（OOM），只能通过将对象设置为 null 的方式来弱化引用， 使其被回收</p>
+  </li>
+  <li>
+    <p>软引用(soft reference)</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"aaa"</span><span class="o">);</span>
+   <span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">soft</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SoftReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="n">str</span><span class="o">);</span> <span class="c1">// 软引用</span>
+</code></pre></div></div>
+
+<p>有用，但非必须， 当内存空间不足时， GC 会回收该引用的对象内存,， 但 GC 线程优先级较低</p>
+
+<p>可以用来实现高速缓存</p>
+
+<ul>
+  <li>弱引用（week reference）</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"aaa"</span><span class="o">);</span>
+   <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">soft</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeakReference</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="n">str</span><span class="o">);</span> <span class="c1">// 软引用</span>
+</code></pre></div></div>
+
+<p>非必须的，类似软引用, 比软引用更弱
+  无论内存是否够用， GC 都会回收弱引用对象</p>
+
+<ul>
+  <li>虚引用（Phantom reference）</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// 虚引用</span>
+  <span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">"aaa"</span><span class="o">);</span>
+  <span class="n">ReferenceQueue</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReferenceQueue</span><span class="o">();</span>
+  <span class="n">PhantomReference</span> <span class="n">ref</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhantomReference</span><span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="n">queue</span><span class="o">);</span>
+</code></pre></div></div>
+<p>不会决定对象的生命周期</p>
+
+<p>任何时候都会被 GC 回收</p>
+
+<p>主要用来跟踪对象被 GC 回收的活动， 起哨兵的作用， 必须和 ReferenceQueue 联合使用</p>
+
+<hr />
+
 
   </section>
 </article>
@@ -171,13 +319,13 @@ GC – Java垃圾回收</p>
     
     <div class="read-more-item">
         <span class="read-more-item-dim">最近的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/" title="link to 多线程之 ThreadLocal">多线程之 ThreadLocal</a></h2>
-        <p class="excerpt">  Pre talk  ThreadLocal 是什么？解决了什么问题？  ThreadLocal 源码分析及实现原理  ThreadLocal 内存泄漏问题  InheritableThreadLocal 的实现原理Pre talk线程封闭技术访问共享可变数据时，通常需要使用同步，同步会产生性能问题，如何避免使用同步的方式来保证线程安全问题 – 不共享数据， 如何保证数据不共享呢？如果仅仅是在单线程内访问数据，就不会存在数据共享的问题，也就不需要数据同步。 (线程封闭: Thread C...&hellip;</p>
+        <h2 class="post-list__post-title post-title"><a href="/2019/03/Spring-Cloud%E7%BB%84%E4%BB%B6%E5%88%86%E6%9E%90/" title="link to Spring-Cloud 组建分析">Spring-Cloud 组建分析</a></h2>
+        <p class="excerpt">&hellip;</p>
         <div class="post-list__meta">
-            <time datetime="2019-03-30 16:39:00 +0800" class="post-list__meta--date date">
-                2019-03-30
+            <time datetime="2019-03-20 23:10:00 +0800" class="post-list__meta--date date">
+                2019-03-20
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/>继续阅读</a></div>
+                class="btn-border-small" href=/2019/03/Spring-Cloud%E7%BB%84%E4%BB%B6%E5%88%86%E6%9E%90/>继续阅读</a></div>
     </div>
     
 
@@ -185,13 +333,13 @@ GC – Java垃圾回收</p>
     
     <div class="read-more-item">
         <span class="read-more-item-dim">更早的文章</span>
-        <h2 class="post-list__post-title post-title"><a href="/2019/03/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/" title="link to 如何理解 java">如何理解 java</a></h2>
-        <p class="excerpt">  java 的平台无关性  面向对象  Java 的语言特性  java 类库  GC对于 Java 的理解，每个程序员都会有不同的见解，而且能够说出很多不同维度的理解，如果发散开来一篇文章是说不完的。所以，本文主要是从 Java 的几点特性出发，简单的聊聊对 Java 的理解， 会不断的补充进来一、Java 的平台无关性Java 平台无关性简单理解就是一次编译到处运行，即平台无关性。那么问题来了，java 是如何实现平台无关性的?通常 Java 程序运行会分为编译期和运行时   编译期...&hellip;</p>
+        <h2 class="post-list__post-title post-title"><a href="/2016/02/hello-world-vno/" title="link to Hello World - Vno">Hello World - Vno</a></h2>
+        <p class="excerpt">What’s thisVno Jekyll is a theme for Jekyll. It is a port of my Ghost theme vno, which is originally developed from Dale Anthony’s Uno.Usage$ git clone https://github.com/onevcat/vno-jekyll.git your_site$ cd your_site$ bundler install$ bundler exe...&hellip;</p>
         <div class="post-list__meta">
-            <time datetime="2019-03-24 13:45:00 +0800" class="post-list__meta--date date">
-                2019-03-24
+            <time datetime="2016-02-16 14:32:24 +0800" class="post-list__meta--date date">
+                2016-02-16
             </time> &#8226; <span class="post-list__meta--tags tags"></span><a
-                class="btn-border-small" href=/2019/03/%E5%AF%B9-java-%E7%9A%84%E7%90%86%E8%A7%A3/>继续阅读</a></div>
+                class="btn-border-small" href=/2016/02/hello-world-vno/>继续阅读</a></div>
     </div>
     
 </section>
@@ -207,7 +355,7 @@ GC – Java垃圾回收</p>
         <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-05 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
     </footer>
 </section>

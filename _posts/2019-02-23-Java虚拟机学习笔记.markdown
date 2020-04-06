@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java 虚拟机学习笔记
+title: Java虚拟机学习笔记
 date: 2019-03-31 23:13
 ---
 
