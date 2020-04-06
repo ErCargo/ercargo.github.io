@@ -5,8 +5,8 @@
     <description>Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Apr 2020 13:50:29 +0800</pubDate>
-    <lastBuildDate>Mon, 06 Apr 2020 13:50:29 +0800</lastBuildDate>
+    <pubDate>Mon, 06 Apr 2020 17:16:43 +0800</pubDate>
+    <lastBuildDate>Mon, 06 Apr 2020 17:16:43 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -49,6 +49,75 @@
         <pubDate>Tue, 31 Mar 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/03/Redis/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/03/Redis/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Spring Cloud 组件分析</title>
+        <description>&lt;ul&gt;
+  &lt;li&gt;Spring Cloud&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;spring-cloud&quot;&gt;Spring Cloud&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;快速开发分布式应用的工具集&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;主要功能&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;功能&lt;/th&gt;
+      &lt;th&gt;工具&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式/版本化的配置管理&lt;/td&gt;
+      &lt;td&gt;Spring Cloud Config、 Consul、Zookeeper、Nacos&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;服务注册与服务发现&lt;/td&gt;
+      &lt;td&gt;Eureka、Consul、Zookeeper、Nacos&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;路由/网关&lt;/td&gt;
+      &lt;td&gt;Zuul、Spring Cloud Gateway&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;端到端的服务调用&lt;/td&gt;
+      &lt;td&gt;RestTemplate、Feign&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;负载均衡&lt;/td&gt;
+      &lt;td&gt;Ribbon&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;断路器&lt;/td&gt;
+      &lt;td&gt;Hystrix、Resilienc4J、 Sentinel&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;全局锁&lt;/td&gt;
+      &lt;td&gt;SpringCloud Cluster (已迁移到 SpringIntegration)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;选举与集群管理状态&lt;/td&gt;
+      &lt;td&gt;SpringCloud Cluster (已迁移到 SpringIntegration)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;分布式消息&lt;/td&gt;
+      &lt;td&gt;Kafka、 RabbitMQ Spring Cloud Stream&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        <pubDate>Fri, 20 Mar 2020 23:10:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/03/Spring-Cloud%E7%BB%84%E4%BB%B6%E5%88%86%E6%9E%90/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/Spring-Cloud%E7%BB%84%E4%BB%B6%E5%88%86%E6%9E%90/</guid>
         
         
       </item>
@@ -1013,66 +1082,6 @@ Java 虚拟机 屏蔽了与具体操作系统平台相关的信息， 使得 Jav
         <pubDate>Sun, 31 Mar 2019 23:13:00 +0800</pubDate>
         <link>http://localhost:4000/2019/03/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <guid isPermaLink="true">http://localhost:4000/2019/03/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>多线程之 ThreadLocal</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;Pre talk&lt;/li&gt;
-  &lt;li&gt;ThreadLocal 是什么？解决了什么问题？&lt;/li&gt;
-  &lt;li&gt;ThreadLocal 源码分析及实现原理&lt;/li&gt;
-  &lt;li&gt;ThreadLocal 内存泄漏问题&lt;/li&gt;
-  &lt;li&gt;InheritableThreadLocal 的实现原理&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-&lt;h2 id=&quot;pre-talk&quot;&gt;Pre talk&lt;/h2&gt;
-
-&lt;h3 id=&quot;线程封闭技术&quot;&gt;线程封闭技术&lt;/h3&gt;
-&lt;p&gt;访问共享可变数据时，通常需要使用同步，同步会产生性能问题，如何避免使用同步的方式来保证线程安全问题 – 不共享数据， 如何保证数据不共享呢？
-如果仅仅是在单线程内访问数据，就不会存在数据共享的问题，也就不需要数据同步。 (线程封闭: Thread Confinement， 是实现线程安全最简单的方式之一)&lt;/p&gt;
-
-&lt;p&gt;当某个对象被封闭在一个线程中时， 这种用法将自动实现线程安全性，即使被封闭的对象本身不是线程安全的。&lt;/p&gt;
-
-&lt;p&gt;线程封闭常用的场景：JDBC 的 Connection 对象（非线程安全的连接池是没有意义的）&lt;/p&gt;
-
-&lt;p&gt;几种线程封闭技术&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Ad-hoc 线程封闭： 由程序来承担维护线程封闭性的职责（脆弱的）&lt;/li&gt;
-  &lt;li&gt;栈封闭: 通过局部变量才能访问对象，局部变量的固有属性就是封闭在执行线程中（执行线程的栈中，因为变量是在栈中，栈是线程独立的）&lt;/li&gt;
-  &lt;li&gt;ThreadLocal: 是维持线程封闭性的规范的方法。ThreadLocal 能使线程中的某个值与保存值的对象关联起来。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;threadlocal-是什么解决了什么问题&quot;&gt;ThreadLocal 是什么、解决了什么问题？&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ThreadLocal.jpg&quot; alt=&quot;jdk1.8 ThreadLocal&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;粗略的解释：ThreadLocal 类提供了线程本地的实例变量。这些变量与普通变量的区别在于：每个使用该变量的线程都会初始化一个独立的副本， ThreadLocal 修饰的实例，是一个典型的和线程相关联的私有的静态变量… （能力有限翻译不出来了）&lt;/p&gt;
-
-&lt;p&gt;ThreadLocal 对象通常用于防止对「可变的单实例变量」或「全局变量」进行共享，如 全局的数据库连接（Connection）。&lt;/p&gt;
-
-&lt;p&gt;ThreadLocal 通常称为：线程本地变量/线程本地存储。ThreadLocal 提供了 get 和 set 方法，为每一个使用该变量的线程存有一份独立的副本。（ get 总是返回的当前执行线程在调用 set 时设置的最新值 ）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;一句话总结&lt;/strong&gt;: ThreadLocal 为每个线程提供局部变量， 每个线程都可以通过 set() get() 对这个局部变量进行操作，但不会和其他线程的局部变量产生冲突， 进而实现线程的数据隔离，保证线程安全。&lt;/p&gt;
-
-&lt;p&gt;另外一定要注意:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;ThreadLocal 不是用来解决共享对象的多线程访问问题， 通过 ThreadLocal.set() 到线程中的对象是该线程自己使用的对应，其他线程是不需要访问的，也访问不到；（各个线程中访问的是不同的对象）&lt;/li&gt;
-  &lt;li&gt;ThreadLocal 使得各线程能够保持各自独立的对象， 并不是通过 ThreadLocal.set() 来实现的， 而是通过 每个线程中的 new 对象的操作来创建的对象，每个线程创建一个。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;最常见的 ThreadLocal 使用场景是用来解决「数据库连接」、「Session 管理」等问题。&lt;/p&gt;
-
-&lt;h2 id=&quot;threadlocal-源码分析及实现原理&quot;&gt;ThreadLocal 源码分析及实现原理&lt;/h2&gt;
-
-&lt;p&gt;set()&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 30 Mar 2019 16:39:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadLocal/</guid>
         
         
       </item>
