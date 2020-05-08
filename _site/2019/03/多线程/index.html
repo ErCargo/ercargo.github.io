@@ -6,16 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>多线程</title>
-  <meta name="description" content="">
+  <meta name="description" content="进程和线程的区别">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="多线程">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:description" content="进程和线程的区别">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="多线程">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="进程和线程的区别">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -160,7 +160,22 @@
   </header>
 
   <section class="post">
-    
+    <h2 id="进程和线程的区别">进程和线程的区别</h2>
+
+<p>抽象答案：进程是资源分配的最小单位， 线程是 CPU 调度的最小单位</p>
+
+<p>如何组织语言能够描述清楚呢？</p>
+
+<ul>
+  <li>一个进程可以包含多个线程</li>
+  <li>进程间难以数据共享， 但是同一进程下的不同线程是可以进行数据共享的；</li>
+  <li>进程比线程消耗更多的 CPU 资源；</li>
+  <li>进程与进程之间的运行不会相互影响， 但是线程之间会相互影响；</li>
+  <li>一个线程使用共享内存时，其他线程必须等待他结束，才能使用这块区域（互斥锁）</li>
+  <li>进程使用的内存地址可以限定使用量（信号量）</li>
+</ul>
+
+<p>……</p>
 
   </section>
 </article>
@@ -206,7 +221,7 @@
         <section class="footer">
     <footer>
     	<span class="footer__copyright">本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享 署名-非商业性使用-相同方式共享 4.0 国际 许可协议</a></span>
-        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-04-06 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
+        <span class="footer__copyright">由 <a href="https://jekyllrb.com">Jekyll</a> 于 2020-05-08 生成，感谢 <a href="https://www.digitalocean.com/?refcode=30ed2d146762">Digital Ocean</a> 为本站提供稳定的 VPS 服务</span>
         <!--<span class="footer__copyright">本站由 <a href="https://github.com/ErCargo">@ErCargo</a> 创建，采用 <a href="https://github.com/onevcat/vno-jekyll">Vno - Jekyll</a> 作为主题，您可以在 GitHub 找到<a href="https://github.com/onevcat/OneV-s-Den">本站源码</a> - &copy; 2020</span>-->
     </footer>
 </section>

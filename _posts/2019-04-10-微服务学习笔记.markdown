@@ -42,3 +42,16 @@ By Verb
 如何实现服务发现
 
 原理： 注册中心
+
+
+
+## Spring Cloud 主要功能
+
+| 功能          |                功能详情                                | 组件  |
+| ------------ | ---------------------------------------------------|
+| Distributed/versioned configuration   | 分布式/版本化配置管理 | [http://onevcat.com](http://onevcat.com)           |
+| Service registration and discovery    | 服务注册与服务发现 | [http://onevcat.com](http://onevcat.com)           |
+| Routing   | 路由 | [http://onevcat.com](http://onevcat.com)           |
+| Service-to-Service calls   | 分布式/版本化配置管理| [http://onevcat.com](http://onevcat.com)           |
+| Distributed/versioned configuration   | 分布式/版本化配置管理| [http://onevcat.com](http://onevcat.com)           |
+| Distributed/versioned configuration   | 分布式/版本化配置管理| [http://onevcat.com](http://onevcat.com)           |

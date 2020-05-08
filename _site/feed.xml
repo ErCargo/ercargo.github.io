@@ -5,8 +5,8 @@
     <description>Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Apr 2020 20:59:48 +0800</pubDate>
-    <lastBuildDate>Mon, 06 Apr 2020 20:59:48 +0800</lastBuildDate>
+    <pubDate>Fri, 08 May 2020 10:19:21 +0800</pubDate>
+    <lastBuildDate>Fri, 08 May 2020 10:19:21 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -51,6 +51,50 @@
 &lt;p&gt;如何实现服务发现&lt;/p&gt;
 
 &lt;p&gt;原理： 注册中心&lt;/p&gt;
+
+&lt;h2 id=&quot;spring-cloud-主要功能&quot;&gt;Spring Cloud 主要功能&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;功能&lt;/th&gt;
+      &lt;th&gt;功能详情&lt;/th&gt;
+      &lt;th&gt;组件&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
+      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Service registration and discovery&lt;/td&gt;
+      &lt;td&gt;服务注册与服务发现&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Routing&lt;/td&gt;
+      &lt;td&gt;路由&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Service-to-Service calls&lt;/td&gt;
+      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
+      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
+      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         <pubDate>Wed, 10 Apr 2019 22:10:00 +0800</pubDate>
         <link>http://localhost:4000/2019/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
@@ -265,7 +309,22 @@
     
       <item>
         <title>多线程</title>
-        <description>
+        <description>&lt;h2 id=&quot;进程和线程的区别&quot;&gt;进程和线程的区别&lt;/h2&gt;
+
+&lt;p&gt;抽象答案：进程是资源分配的最小单位， 线程是 CPU 调度的最小单位&lt;/p&gt;
+
+&lt;p&gt;如何组织语言能够描述清楚呢？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一个进程可以包含多个线程&lt;/li&gt;
+  &lt;li&gt;进程间难以数据共享， 但是同一进程下的不同线程是可以进行数据共享的；&lt;/li&gt;
+  &lt;li&gt;进程比线程消耗更多的 CPU 资源；&lt;/li&gt;
+  &lt;li&gt;进程与进程之间的运行不会相互影响， 但是线程之间会相互影响；&lt;/li&gt;
+  &lt;li&gt;一个线程使用共享内存时，其他线程必须等待他结束，才能使用这块区域（互斥锁）&lt;/li&gt;
+  &lt;li&gt;进程使用的内存地址可以限定使用量（信号量）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;……&lt;/p&gt;
 </description>
         <pubDate>Tue, 05 Mar 2019 20:45:00 +0800</pubDate>
         <link>http://localhost:4000/2019/03/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
