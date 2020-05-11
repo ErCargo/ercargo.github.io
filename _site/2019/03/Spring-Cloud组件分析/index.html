@@ -6,16 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>Spring Cloud 组件分析</title>
-  <meta name="description" content="  Spring Cloud  ">
+  <meta name="description" content="Spring Cloud">
   <meta name="author" content="Wei Wang">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Spring Cloud 组件分析">
-  <meta name="twitter:description" content="  Spring Cloud  ">
+  <meta name="twitter:description" content="Spring Cloud">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="Spring Cloud 组件分析">
-  <meta property="og:description" content="  Spring Cloud  ">
+  <meta property="og:description" content="Spring Cloud">
   
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link href="/assets/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -160,65 +160,74 @@
   </header>
 
   <section class="post">
-    <ul>
-  <li>Spring Cloud</li>
-  <li></li>
-</ul>
-
-<h2 id="spring-cloud">Spring Cloud</h2>
+    <h2 id="spring-cloud">Spring Cloud</h2>
 
 <blockquote>
   <p>快速开发分布式应用的工具集</p>
 </blockquote>
 
-<p>主要功能</p>
+<h3 id="spring-cloud-主要功能">Spring Cloud 主要功能</h3>
 
 <table>
   <thead>
     <tr>
       <th>功能</th>
-      <th>工具</th>
+      <th>功能详情</th>
+      <th>组件</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>分布式/版本化的配置管理</td>
-      <td>Spring Cloud Config、 Consul、Zookeeper、Nacos</td>
+      <td>Distributed/versioned configuration</td>
+      <td>分布式/版本化配置管理</td>
+      <td>Spring Cloud Config; Consul; Zookeeper; Nacos</td>
     </tr>
     <tr>
+      <td>Service registration and discovery</td>
       <td>服务注册与服务发现</td>
-      <td>Eureka、Consul、Zookeeper、Nacos</td>
+      <td>Eureka; Consul; Zookeeper; Nacos</td>
     </tr>
     <tr>
-      <td>路由/网关</td>
-      <td>Zuul、Spring Cloud Gateway</td>
+      <td>Routing</td>
+      <td>路由</td>
+      <td>Zuul; Spring Cloud Gateway</td>
     </tr>
     <tr>
-      <td>端到端的服务调用</td>
-      <td>RestTemplate、Feign</td>
+      <td>Service-to-Service calls</td>
+      <td>端到端的调用</td>
+      <td>RestTemplate; Feign</td>
     </tr>
     <tr>
+      <td>Load balancing</td>
       <td>负载均衡</td>
       <td>Ribbon</td>
     </tr>
     <tr>
+      <td>Circuit Breakers</td>
       <td>断路器</td>
-      <td>Hystrix、Resilienc4J、 Sentinel</td>
+      <td>Hystrix; Resilience4J; Sentinel</td>
     </tr>
     <tr>
+      <td>Global locks</td>
       <td>全局锁</td>
-      <td>SpringCloud Cluster (已迁移到 SpringIntegration)</td>
+      <td>Spring Cloud Clutser(Spring Integration)</td>
     </tr>
     <tr>
-      <td>选举与集群管理状态</td>
-      <td>SpringCloud Cluster (已迁移到 SpringIntegration)</td>
+      <td>Leadership election and cluster state</td>
+      <td>选举与集群状态管理</td>
+      <td>Spring Cloud Clutser(Spring Integration)</td>
     </tr>
     <tr>
+      <td>Distributed messaging</td>
       <td>分布式消息</td>
-      <td>Kafka、 RabbitMQ Spring Cloud Stream</td>
+      <td>Spring Cloud Stream + Kafka/RabbitMQ/RocketMQ</td>
     </tr>
   </tbody>
 </table>
+
+<h2 id="spring-cloud-常用组件">Spring Cloud 常用组件</h2>
+
+<p><img src="/assets/images/spring-cloud-zj.jpg" alt="zj" /></p>
 
 <h2 id="spring-cloud-版本与兼容性">Spring cloud 版本与兼容性</h2>
 

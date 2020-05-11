@@ -5,8 +5,8 @@
     <description>Action Conquers Fear, Impetuous, Indolence and so on. (行动能够克服一切恐惧，浮躁，懒惰)</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 May 2020 10:19:21 +0800</pubDate>
-    <lastBuildDate>Fri, 08 May 2020 10:19:21 +0800</lastBuildDate>
+    <pubDate>Fri, 08 May 2020 14:15:44 +0800</pubDate>
+    <lastBuildDate>Fri, 08 May 2020 14:15:44 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -52,49 +52,6 @@
 
 &lt;p&gt;原理： 注册中心&lt;/p&gt;
 
-&lt;h2 id=&quot;spring-cloud-主要功能&quot;&gt;Spring Cloud 主要功能&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;功能&lt;/th&gt;
-      &lt;th&gt;功能详情&lt;/th&gt;
-      &lt;th&gt;组件&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
-      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Service registration and discovery&lt;/td&gt;
-      &lt;td&gt;服务注册与服务发现&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Routing&lt;/td&gt;
-      &lt;td&gt;路由&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Service-to-Service calls&lt;/td&gt;
-      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
-      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
-      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
 </description>
         <pubDate>Wed, 10 Apr 2019 22:10:00 +0800</pubDate>
         <link>http://localhost:4000/2019/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
@@ -149,65 +106,74 @@
     
       <item>
         <title>Spring Cloud 组件分析</title>
-        <description>&lt;ul&gt;
-  &lt;li&gt;Spring Cloud&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;spring-cloud&quot;&gt;Spring Cloud&lt;/h2&gt;
+        <description>&lt;h2 id=&quot;spring-cloud&quot;&gt;Spring Cloud&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;快速开发分布式应用的工具集&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;主要功能&lt;/p&gt;
+&lt;h3 id=&quot;spring-cloud-主要功能&quot;&gt;Spring Cloud 主要功能&lt;/h3&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;功能&lt;/th&gt;
-      &lt;th&gt;工具&lt;/th&gt;
+      &lt;th&gt;功能详情&lt;/th&gt;
+      &lt;th&gt;组件&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;分布式/版本化的配置管理&lt;/td&gt;
-      &lt;td&gt;Spring Cloud Config、 Consul、Zookeeper、Nacos&lt;/td&gt;
+      &lt;td&gt;Distributed/versioned configuration&lt;/td&gt;
+      &lt;td&gt;分布式/版本化配置管理&lt;/td&gt;
+      &lt;td&gt;Spring Cloud Config; Consul; Zookeeper; Nacos&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;Service registration and discovery&lt;/td&gt;
       &lt;td&gt;服务注册与服务发现&lt;/td&gt;
-      &lt;td&gt;Eureka、Consul、Zookeeper、Nacos&lt;/td&gt;
+      &lt;td&gt;Eureka; Consul; Zookeeper; Nacos&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;路由/网关&lt;/td&gt;
-      &lt;td&gt;Zuul、Spring Cloud Gateway&lt;/td&gt;
+      &lt;td&gt;Routing&lt;/td&gt;
+      &lt;td&gt;路由&lt;/td&gt;
+      &lt;td&gt;Zuul; Spring Cloud Gateway&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;端到端的服务调用&lt;/td&gt;
-      &lt;td&gt;RestTemplate、Feign&lt;/td&gt;
+      &lt;td&gt;Service-to-Service calls&lt;/td&gt;
+      &lt;td&gt;端到端的调用&lt;/td&gt;
+      &lt;td&gt;RestTemplate; Feign&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;Load balancing&lt;/td&gt;
       &lt;td&gt;负载均衡&lt;/td&gt;
       &lt;td&gt;Ribbon&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;Circuit Breakers&lt;/td&gt;
       &lt;td&gt;断路器&lt;/td&gt;
-      &lt;td&gt;Hystrix、Resilienc4J、 Sentinel&lt;/td&gt;
+      &lt;td&gt;Hystrix; Resilience4J; Sentinel&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;Global locks&lt;/td&gt;
       &lt;td&gt;全局锁&lt;/td&gt;
-      &lt;td&gt;SpringCloud Cluster (已迁移到 SpringIntegration)&lt;/td&gt;
+      &lt;td&gt;Spring Cloud Clutser(Spring Integration)&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;选举与集群管理状态&lt;/td&gt;
-      &lt;td&gt;SpringCloud Cluster (已迁移到 SpringIntegration)&lt;/td&gt;
+      &lt;td&gt;Leadership election and cluster state&lt;/td&gt;
+      &lt;td&gt;选举与集群状态管理&lt;/td&gt;
+      &lt;td&gt;Spring Cloud Clutser(Spring Integration)&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;Distributed messaging&lt;/td&gt;
       &lt;td&gt;分布式消息&lt;/td&gt;
-      &lt;td&gt;Kafka、 RabbitMQ Spring Cloud Stream&lt;/td&gt;
+      &lt;td&gt;Spring Cloud Stream + Kafka/RabbitMQ/RocketMQ&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;h2 id=&quot;spring-cloud-常用组件&quot;&gt;Spring Cloud 常用组件&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/spring-cloud-zj.jpg&quot; alt=&quot;zj&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;spring-cloud-版本与兼容性&quot;&gt;Spring cloud 版本与兼容性&lt;/h2&gt;
 
